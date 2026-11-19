@@ -7,7 +7,7 @@ import pulp
 from scipy.stats import norm
 
 
-def solve_ilp(value, cost, budget, time_limit=120, gap_rel=1e-5):
+def solve_ilp(value, cost, budget, time_limit=60, gap_rel=1e-5):
     """max sum x_i*value_i  s.t. sum x_i*cost_i <= budget, x binary. Returns boolean mask.
     CBC stops at a relative MIP gap of `gap_rel`; `lp_upper_bound` reports the true remaining gap."""
     value, cost = np.asarray(value, float), np.asarray(cost, float)

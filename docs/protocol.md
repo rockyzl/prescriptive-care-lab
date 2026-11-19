@@ -207,4 +207,15 @@ CPU only, no GPU, no paid API, no cloud, no LLM calls. Carrier CSVs (about 1.2 G
 
 ## Deviations
 
-(none yet)
+All of the following were made before any model output was seen, unless stated otherwise.
+
+1. **Negative payments clipped before `log1p`.**
+   - 42 cohort members have negative 2008 payment amounts. These are claim adjustments: 8 in `bene08_medreimb_ip`/`ip_paid`, 34 in `bene08_medreimb_op`/`op_paid`, and 2 in the total.
+   - The first `dev` call stopped on a guard that rejected negative values. The transform now clips at 0 before `log1p`. No model had been fit.
+2. **Outcome code refactor.** The 2009 admission count was moved into the function `admissions_in_year` so it can be unit-tested. Rebuilt derived files are byte-identical (same SHA-256).
+3. **ILP solver settings.** CBC runs with a relative MIP gap of 1e-5 and a 60 s time limit. Without the gap setting, a small synthetic test knapsack ran for more than 100 s. The fractional-knapsack LP bound is reported next to every ILP solution, so the remaining optimality gap is visible.
+4. **LightGBM reproducibility settings.** `deterministic=True`, `force_row_wise=True` and 4 threads are computational settings, not hyperparameters.
+5. **Validation rehearsal.** `dev` runs the prescriptive pipeline once on the validation split (20 bootstrap resamples) to catch bugs before the one-shot test. It is labeled a rehearsal, not a result.
+   - The first rehearsal used the ILP. Its hours-budget solves often ran to the time limit, so the rehearsal took about 15 minutes.
+   - The final `dev` run uses greedy in the rehearsal. The ILP path is covered by tests and runs in `test`.
+   - That first run also failed to write JSON because of one NaN SHAP correlation (an unused feature). NaN is now written as null.

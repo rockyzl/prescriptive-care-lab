@@ -21,9 +21,8 @@ class Preprocessor:
 
     def _log(self, df):
         x = df[self.columns].astype(float).copy()
-        if (x[self.log1p_cols] < 0).any().any():
-            raise ValueError("log1p column has negative values")
-        x[self.log1p_cols] = np.log1p(x[self.log1p_cols])
+        # Negative payments are claim adjustments (42 of 72,071 members in 2008); clip at 0 before log1p.
+        x[self.log1p_cols] = np.log1p(x[self.log1p_cols].clip(lower=0))
         return x
 
     def fit(self, train_df):

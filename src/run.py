@@ -37,7 +37,19 @@ def protocol():
     return json.loads((ROOT / "protocol.json").read_text())
 
 
+def _clean(v):
+    """NaN/inf -> None so results stay strict JSON (e.g. SHAP correlation for an unused feature)."""
+    if isinstance(v, dict):
+        return {k: _clean(x) for k, x in v.items()}
+    if isinstance(v, (list, tuple)):
+        return [_clean(x) for x in v]
+    if isinstance(v, float) and not np.isfinite(v):
+        return None
+    return v
+
+
 def write_json(path, value, exclusive=False):
+    value = _clean(value)
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "x" if exclusive else "w") as f:
         json.dump(value, f, indent=2, allow_nan=False)
@@ -269,7 +281,7 @@ def dev():
     preds_va = predict_all(va, art)
     phen_va = assign_phenotype(va, ph)
     rehearsal = prescriptive_analysis(ys["val"]["y_ip"], preds_va[("y_ip", chosen)], va.bene08_medreimb_total.to_numpy(float), phen_va, ph, p,
-                                      n_boot=20, seed=seed, use_ilp=True, random_draws=50)
+                                      n_boot=20, seed=seed, use_ilp=False, random_draws=50)
 
     out = {
         "phase": "dev", "created_at": datetime.now(timezone.utc).isoformat(), "env": env_info(),
@@ -281,7 +293,7 @@ def dev():
         "shap_val_subsample": shap_rank, "logistic_coefficients_y_ip": lr_coef,
         "clustering": {"k_table": k_table, "chosen_k": int(k), "rule": rule, "profiles_train": profiles,
                        "assumed_rrr_by_phenotype": ph["assumed_rrr_by_phenotype"], "assumed_hours_by_phenotype": ph["assumed_hours_by_phenotype"]},
-        "prescriptive_rehearsal_on_validation": {"note": "Pipeline rehearsal on the validation split (20 bootstrap resamples, 50 random draws); not a result.",
+        "prescriptive_rehearsal_on_validation": {"note": "Pipeline rehearsal on the validation split (20 bootstrap resamples, 50 random draws, greedy instead of ILP for speed); not a result.",
                                                   "results": rehearsal},
         "compute": {"seconds": time.time() - t0, "peak_rss_mb": peak_rss_mb()},
     }
