@@ -219,3 +219,9 @@ All of the following were made before any model output was seen, unless stated o
    - The first rehearsal used the ILP. Its hours-budget solves often ran to the time limit, so the rehearsal took about 15 minutes.
    - The final `dev` run uses greedy in the rehearsal. The ILP path is covered by tests and runs in `test`.
    - That first run also failed to write JSON because of one NaN SHAP correlation (an unused feature). NaN is now written as null.
+6. **Full validation dry run.** After `dev` and before `freeze`:
+   - The test-phase evaluation was refactored into `evaluate_part`. A `dryrun` phase runs it on the **validation** split: 50 metric and 20 policy resamples, greedy instead of ILP. It writes `results/val_dryrun.json`.
+   - Purpose: exercise every code path, including figures and tables, before the one-shot test.
+   - `dev` logic, models and phenotypes are unchanged.
+   - Every result now also records the optimized policy's relative gap to the LP bound.
+7. **Phenotype names.** Plain-language phenotype names in `scripts/make_figures.py` were written from the train profiles before the test run.

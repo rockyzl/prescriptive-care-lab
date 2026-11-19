@@ -7,6 +7,7 @@ import base64
 import html
 import json
 import sys
+import textwrap
 from pathlib import Path
 
 import matplotlib
@@ -15,9 +16,12 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-FIG = ROOT / "reports" / "figures"
+# usage: make_figures.py [results_json] [out_dir]  (defaults: results/test_results.json, reports/)
+RES_PATH = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "results" / "test_results.json"
+OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "reports"
+FIG = OUT / "figures"
 DEV = json.loads((ROOT / "results" / "dev_results.json").read_text())
-TEST = json.loads((ROOT / "results" / "test_results.json").read_text())
+TEST = json.loads(RES_PATH.read_text())
 
 # reference palette (dataviz skill, light mode), categorical slots in fixed order
 BLUE, ORANGE, AQUA, YELLOW, VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#6250d6"
@@ -26,6 +30,10 @@ plt.rcParams.update({"font.size": 10, "axes.edgecolor": INK2, "axes.labelcolor":
                      "axes.spines.top": False, "axes.spines.right": False, "axes.grid": True, "grid.color": GRID,
                      "grid.linewidth": 0.6, "figure.facecolor": SURFACE, "axes.facecolor": SURFACE, "savefig.dpi": 150})
 
+# Plain-language names written from the TRAIN profiles in results/dev_results.json (before the test run).
+PHENOTYPE_NAMES = {0: "No recorded 2008 care", 5: "Light use, few conditions", 3: "Cardiometabolic multimorbidity",
+                   2: "Cardiometabolic + arthritis", 1: "Cancer", 4: "ESRD / kidney disease",
+                   7: "Recent hospital stays, complex", 6: "Stroke/TIA + hospital stays"}
 POLICY_LABEL = {"random": "Random", "highest_cost": "Highest 2008 cost", "highest_risk": "Highest predicted risk",
                 "optimized": "Optimized (ILP)", "oracle": "Oracle (knows outcome)"}
 POLICY_COLOR = {"random": INK2, "highest_cost": ORANGE, "highest_risk": BLUE, "optimized": AQUA, "oracle": "#b9b8b2"}
@@ -67,16 +75,16 @@ def fig_phenotypes():
     prof = {p["phenotype"]: p for p in DEV["clustering"]["profiles_train"]}
     test = {p["phenotype"]: p for p in TEST["phenotypes_test"]}
     order = sorted(prof, key=lambda c: prof[c]["risk_rank"])
-    labels = [f"P{c}\n{prof[c]['share_train']*100:.0f}% of members" for c in order]
+    labels = [textwrap.fill(PHENOTYPE_NAMES[c], 15, break_long_words=False) + f"\n({prof[c]['share_train']*100:.0f}%)" for c in order]
     x = range(len(order))
-    fig, ax = plt.subplots(figsize=(9, 4))
+    fig, ax = plt.subplots(figsize=(10, 4.8))
     w = 0.38
     ax.bar([i - w / 2 - 0.01 for i in x], [prof[c]["train_admission_rate_2009"] * 100 for c in order], w, color=ORANGE, label="Train (fit set)")
     ax.bar([i + w / 2 + 0.01 for i in x], [test[c]["test_admission_rate_2009"] * 100 for c in order], w, color=BLUE, label="Test (held out)")
     for i, c in enumerate(order):
         ax.text(i + w / 2 + 0.01, test[c]["test_admission_rate_2009"] * 100 + 0.6, f"{test[c]['test_admission_rate_2009']*100:.0f}%",
                 ha="center", fontsize=8, color=INK)
-    ax.set_xticks(list(x), labels, fontsize=8)
+    ax.set_xticks(list(x), labels, fontsize=7.5)
     ax.set_ylabel("% with any 2009 admission")
     ax.set_title("Next-year admission rate by 2008 phenotype (ordered by train risk)", fontsize=11)
     ax.legend(frameon=False)
@@ -104,8 +112,8 @@ def fig_policies():
         ax.bar(xs, vals, w, color=POLICY_COLOR[pol], label=POLICY_LABEL[pol] + (" = Optimized when effect is uniform" if pol == "highest_risk" else ""))
         if pol != "oracle":
             ax.errorbar(xs, vals, yerr=[lo, hi], fmt="none", ecolor=INK, elinewidth=1, capsize=3)
-        for xx, v in zip(xs, vals):
-            ax.text(xx, v + 3, f"{v:.0f}", ha="center", fontsize=8, color=INK)
+        for xx, v, h in zip(xs, vals, hi):
+            ax.text(xx, v + h + 3, f"{v:.0f}", ha="center", fontsize=8, color=INK)
     ax.set_xticks(range(len(fracs)), [f"Contact {int(f*100)}% of members\n({find('uniform', f, 'U20')['capacity_slots']} people)" for f in fracs])
     ax.set_ylabel("Admissions avoided (assumed 20% effect)")
     ax.set_title("Who to contact: avoided admissions on test members, ASSUMED 20% risk reduction", fontsize=11)
@@ -138,7 +146,7 @@ def fig_sensitivity():
 
 def fig_subgroups():
     g = TEST["fairness"]["groups"]
-    keys = list(g)
+    keys = group_order(g)
     fig, ax = plt.subplots(figsize=(9, 4.4))
     vals = [g[k]["capture_rate"] * 100 for k in keys]
     ax.barh(range(len(keys)), vals, color=BLUE, height=0.6)
@@ -158,6 +166,11 @@ def fig_subgroups():
     fig.tight_layout()
     fig.savefig(FIG / "subgroups.png")
     plt.close(fig)
+
+
+def group_order(g):
+    ages = [f"age_group={a}" for a in ["<65", "65-74", "75-84", "85+"] if f"age_group={a}" in g]
+    return ages + [k for k in g if not k.startswith("age_group=")]
 
 
 def fig_shap():
@@ -196,7 +209,7 @@ def tables():
     test = {p["phenotype"]: p for p in TEST["phenotypes_test"]}
     for p in sorted(DEV["clustering"]["profiles_train"], key=lambda p: p["risk_rank"]):
         t = test[p["phenotype"]]
-        L.append(f"| P{p['phenotype']} (risk rank {p['risk_rank']}) | {p['share_train']*100:.1f}% | {p['train_admission_rate_2009']*100:.1f}% | {t['n_test']:,} | "
+        L.append(f"| P{p['phenotype']} {PHENOTYPE_NAMES[p['phenotype']]} | {p['share_train']*100:.1f}% | {p['train_admission_rate_2009']*100:.1f}% | {t['n_test']:,} | "
                  f"{t['test_admission_rate_2009']*100:.1f}% | {t['test_mean_predicted_risk']*100:.1f}% |")
     L.append("")
     L.append("## Targeting on test: realized avoided admissions = Σ observed admission × ASSUMED risk reduction\n")
@@ -223,7 +236,8 @@ def tables():
     L.append("## Subgroup audit (5% capacity, uniform 20% effect, uniform cost)\n")
     L.append("| Group | n | Admission rate | Mean predicted | AUROC [95% CI] | Selection rate | Capture rate [95% CI] | Flag |")
     L.append("|---|---|---|---|---|---|---|---|")
-    for k, g in TEST["fairness"]["groups"].items():
+    for k in group_order(TEST["fairness"]["groups"]):
+        g = TEST["fairness"]["groups"][k]
         L.append(f"| {k} | {g['n']:,} | {g['admission_rate']*100:.1f}% | {g['mean_predicted']*100:.1f}% | {g['auroc']:.3f} [{g['auroc_ci95'][0]:.3f}, {g['auroc_ci95'][1]:.3f}] | "
                  f"{g['selection_rate']*100:.1f}% | {g['capture_rate']*100:.1f}% [{g['capture_rate_ci95'][0]*100:.1f}, {g['capture_rate_ci95'][1]*100:.1f}] | {'yes' if g['flag_capture_gap_gt_5pp'] else ''} |")
     ov = TEST["fairness"]["overall"]
@@ -297,9 +311,10 @@ def main():
     fig_subgroups()
     fig_shap()
     t = tables()
-    (ROOT / "results" / "tables.md").write_text("# Result tables (generated from results/*.json)\n\n" + t)
-    (ROOT / "reports" / "summary.html").write_text(summary_html(t))
-    print("wrote figures, results/tables.md, reports/summary.html", file=sys.stderr)
+    tables_path = ROOT / "results" / "tables.md" if OUT == ROOT / "reports" else OUT / "tables.md"
+    tables_path.write_text(f"# Result tables (generated from {RES_PATH.name} and dev_results.json)\n\n" + t)
+    (OUT / "summary.html").write_text(summary_html(t))
+    print("wrote figures, tables and summary.html to", OUT, file=sys.stderr)
 
 
 if __name__ == "__main__":

@@ -369,11 +369,24 @@ def subgroup_audit(y, risk, sel, audit_part, n_boot, seed):
 
 def test():
     frozen = check_freeze()
+    p = protocol()
+    evaluate_part("test", p["bootstrap"]["metrics_resamples"], p["bootstrap"]["policy_resamples"], use_ilp=True,
+                  out_path=RESULTS / "test_results.json", exclusive=True, freeze_commit=frozen["commit"])
+
+
+def dryrun():
+    """Rehearse the full evaluation on the VALIDATION split (never reads test labels, never writes test_results.json)."""
+    evaluate_part("val", 50, 20, use_ilp=False, out_path=RESULTS / "val_dryrun.json", exclusive=False, freeze_commit=None)
+
+
+def evaluate_part(part, n_metric_boot, n_policy_boot, use_ilp, out_path, exclusive, freeze_commit):
+    if part not in ("val", "test"):
+        raise ValueError(part)
     t0 = time.time()
     p = protocol()
     seed = p["seed"]
-    feats, audit, labels = load(["test"])
-    lab = labels["test"]
+    feats, audit, labels = load([part])
+    lab = labels[part]
     te, au = feats.loc[lab.index], audit.loc[lab.index]
     art = load_artefacts()
     thr = art["meta"]["high_cost_threshold"]
@@ -384,7 +397,7 @@ def test():
     predictive = {}
     for o in OUTCOMES:
         pm = {m: preds[(o, m)] for m in ["logistic", "lightgbm"]}
-        res, diffs = bootstrap_metrics(ys[o], pm, p["bootstrap"]["metrics_resamples"], seed, pairs=[("lightgbm", "logistic")])
+        res, diffs = bootstrap_metrics(ys[o], pm, n_metric_boot, seed, pairs=[("lightgbm", "logistic")])
         predictive[o] = {"metrics": res, "paired_differences": diffs, "prevalence": float(ys[o].mean()),
                          "reliability": {m: reliability(ys[o], v, p["calibration_bins"]) for m, v in pm.items()}}
         print(o, {m: round(v["auroc"]["estimate"], 4) for m, v in res.items()}, flush=True)
@@ -402,13 +415,13 @@ def test():
     print("phenotypes", [(d["phenotype"], round(d["test_admission_rate_2009"], 3)) for d in by_phen], flush=True)
 
     prior_cost = te.bene08_medreimb_total.to_numpy(float)
-    presc = prescriptive_analysis(y, risk, prior_cost, phen, ph, p, n_boot=p["bootstrap"]["policy_resamples"], seed=seed, use_ilp=True)
+    presc = prescriptive_analysis(y, risk, prior_cost, phen, ph, p, n_boot=n_policy_boot, seed=seed, use_ilp=use_ilp)
 
     fp = p["prescriptive"]["fairness_policy"]
     eff, cst = scenario_vectors(phen, ph, p)
     budget, slots = budget_for(fp["cost"], fp["capacity"], len(y), p)
     masks, _ = select_all(risk, eff[fp["effect"]], cst[fp["cost"]], prior_cost, y, budget, True, use_ilp=False)
-    fairness = subgroup_audit(y, risk, masks["optimized"], au, p["bootstrap"]["policy_resamples"], seed)
+    fairness = subgroup_audit(y, risk, masks["optimized"], au, n_policy_boot, seed)
     fairness["policy"] = fp
 
     # Sensitivity: exclude members with 0 Part A months in 2009
@@ -434,17 +447,21 @@ def test():
                                                             "clusters_per_arm": int(np.ceil(n_arm * design_effect(pc["cluster_size"], icc) / pc["cluster_size"]))}
                                              for icc in pc["icc_grid"]}})
 
-    out = {"phase": "test", "created_at": datetime.now(timezone.utc).isoformat(), "freeze_commit": frozen["commit"], "env": env_info(),
+    for r in presc:
+        lp = r["lp_upper_bound_planned_avoided"]
+        r["optimized_relative_gap_to_lp_bound"] = (lp - r["point"]["optimized"]["planned_avoided"]) / lp if lp > 0 else 0.0
+    out = {"phase": part, "created_at": datetime.now(timezone.utc).isoformat(), "freeze_commit": freeze_commit, "env": env_info(),
+           "resamples": {"metrics": n_metric_boot, "policy": n_policy_boot}, "optimizer": "ILP (PuLP/CBC)" if use_ilp else "greedy",
            "synthetic_data_warning": "CMS DE-SynPUF is synthetic; no clinical or epidemiological conclusion is valid from these numbers.",
            "n_test": int(len(y)), "events_y_ip": int(y.sum()), "high_cost_threshold": thr, "targeting_model": chosen,
            "predictive": predictive, "phenotypes_test": by_phen, "prescriptive": presc, "fairness": fairness,
            "sensitivity_exclude_parta0_2009": sens, "pilot": pilot,
            "compute": {"seconds": time.time() - t0, "peak_rss_mb": peak_rss_mb()}}
-    write_json(RESULTS / "test_results.json", out, exclusive=True)
-    print("test done", round(time.time() - t0), "s")
+    write_json(out_path, out, exclusive=exclusive)
+    print(part, "evaluation done", round(time.time() - t0), "s")
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("phase", choices=["dev", "freeze", "test"])
-    {"dev": dev, "freeze": freeze, "test": test}[ap.parse_args().phase]()
+    ap.add_argument("phase", choices=["dev", "dryrun", "freeze", "test"])
+    {"dev": dev, "dryrun": dryrun, "freeze": freeze, "test": test}[ap.parse_args().phase]()
