@@ -1,0 +1,6751 @@
+{
+  "phase": "test",
+  "created_at": "2026-11-19T14:07:56.617255+00:00",
+  "freeze_commit": "1e34e9ef9930ae13ad0d574312ee03562db1f6a0",
+  "env": {
+    "python": "3.13.12",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "cpu_count": 16,
+    "lightgbm": "4.7.0",
+    "sklearn": "1.9.1",
+    "pulp": "3.3.2"
+  },
+  "resamples": {
+    "metrics": 1000,
+    "policy": 300
+  },
+  "optimizer": "ILP (PuLP/CBC)",
+  "synthetic_data_warning": "CMS DE-SynPUF is synthetic; no clinical or epidemiological conclusion is valid from these numbers.",
+  "n_test": 14288,
+  "events_y_ip": 2696,
+  "high_cost_threshold": 12440.0,
+  "targeting_model": "lightgbm",
+  "predictive": {
+    "y_ip": {
+      "metrics": {
+        "logistic": {
+          "auroc": {
+            "estimate": 0.7430348529017249,
+            "ci95": [
+              0.7337390541581215,
+              0.7522058165419733
+            ]
+          },
+          "auprc": {
+            "estimate": 0.3783585176377098,
+            "ci95": [
+              0.3612895791394882,
+              0.3975392862978396
+            ]
+          },
+          "brier": {
+            "estimate": 0.13559329021678934,
+            "ci95": [
+              0.1324175726662426,
+              0.13902144530439642
+            ]
+          },
+          "cal_intercept": {
+            "estimate": 0.03947520140755419,
+            "ci95": [
+              -0.0032258145518280685,
+              0.08084661995027534
+            ]
+          },
+          "cal_slope": {
+            "estimate": 1.0389418388452458,
+            "ci95": [
+              0.9822966205665504,
+              1.0961223523927055
+            ]
+          },
+          "n": 14288,
+          "events": 2696,
+          "mean_pred": 0.1833670798869384,
+          "obs_rate": 0.18868980963045912
+        },
+        "lightgbm": {
+          "auroc": {
+            "estimate": 0.741343026911018,
+            "ci95": [
+              0.7323008386509122,
+              0.7505066535947786
+            ]
+          },
+          "auprc": {
+            "estimate": 0.3762007360919345,
+            "ci95": [
+              0.35883107237884876,
+              0.3948471572236827
+            ]
+          },
+          "brier": {
+            "estimate": 0.13588841561300224,
+            "ci95": [
+              0.13260971140706615,
+              0.1392609086303788
+            ]
+          },
+          "cal_intercept": {
+            "estimate": 0.04105709431364831,
+            "ci95": [
+              -1.5964623053651117e-05,
+              0.0818079775904036
+            ]
+          },
+          "cal_slope": {
+            "estimate": 1.1074807482346132,
+            "ci95": [
+              1.0484411776893112,
+              1.169784813024434
+            ]
+          },
+          "n": 14288,
+          "events": 2696,
+          "mean_pred": 0.18310418824474586,
+          "obs_rate": 0.18868980963045912
+        }
+      },
+      "paired_differences": {
+        "lightgbm-logistic": {
+          "auroc": {
+            "estimate": -0.00169182599070683,
+            "ci95": [
+              -0.004438169627475735,
+              0.0012814138092116759
+            ]
+          },
+          "auprc": {
+            "estimate": -0.0021577815457752836,
+            "ci95": [
+              -0.010098670894191461,
+              0.0059592760333542095
+            ]
+          },
+          "brier": {
+            "estimate": 0.000295125396212903,
+            "ci95": [
+              -0.00020656233059075448,
+              0.0007684801330771635
+            ]
+          }
+        }
+      },
+      "prevalence": 0.18868980963045912,
+      "reliability": {
+        "logistic": [
+          {
+            "mean_pred": 0.011184655351926897,
+            "obs_rate": 0.006298110566829951,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.01815142825526774,
+            "obs_rate": 0.01609517144856543,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.07972990171386479,
+            "obs_rate": 0.08817354793561931,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.12968270583948444,
+            "obs_rate": 0.1462561231630511,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.1632655920683607,
+            "obs_rate": 0.16794961511546536,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.19404458722881585,
+            "obs_rate": 0.19314205738278517,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.2267435986529608,
+            "obs_rate": 0.2225332400279916,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.26601165121556,
+            "obs_rate": 0.258222533240028,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.31982821572847847,
+            "obs_rate": 0.3480392156862745,
+            "n": 1428
+          },
+          {
+            "mean_pred": 0.4252932544944748,
+            "obs_rate": 0.44047619047619047,
+            "n": 1428
+          }
+        ],
+        "lightgbm": [
+          {
+            "mean_pred": 0.010666417346351405,
+            "obs_rate": 0.007697690692792162,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.021481525688402503,
+            "obs_rate": 0.010496850944716585,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.09767997495747356,
+            "obs_rate": 0.08957312806158152,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.13812039008344645,
+            "obs_rate": 0.1350594821553534,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.16441943985340196,
+            "obs_rate": 0.16794961511546536,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.19240909178505908,
+            "obs_rate": 0.20573827851644508,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.22142185391171562,
+            "obs_rate": 0.24072778166550035,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.2560709744091332,
+            "obs_rate": 0.2596221133659902,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.3087012859527935,
+            "obs_rate": 0.3319327731092437,
+            "n": 1428
+          },
+          {
+            "mean_pred": 0.4203248247047253,
+            "obs_rate": 0.438375350140056,
+            "n": 1428
+          }
+        ]
+      }
+    },
+    "high_cost": {
+      "metrics": {
+        "logistic": {
+          "auroc": {
+            "estimate": 0.8001132305214668,
+            "ci95": [
+              0.7889300801679138,
+              0.8102122466812599
+            ]
+          },
+          "auprc": {
+            "estimate": 0.36015391331335,
+            "ci95": [
+              0.33592843912348624,
+              0.3858248849608002
+            ]
+          },
+          "brier": {
+            "estimate": 0.07877874189916383,
+            "ci95": [
+              0.07576300153283932,
+              0.08237612669317973
+            ]
+          },
+          "cal_intercept": {
+            "estimate": 0.016876735468231572,
+            "ci95": [
+              -0.04146675454918617,
+              0.07673011777994289
+            ]
+          },
+          "cal_slope": {
+            "estimate": 1.0567778780791774,
+            "ci95": [
+              0.9984956642244602,
+              1.1190187025160105
+            ]
+          },
+          "n": 14288,
+          "events": 1466,
+          "mean_pred": 0.10125551156656072,
+          "obs_rate": 0.10260358342665174
+        },
+        "lightgbm": {
+          "auroc": {
+            "estimate": 0.7992185157544918,
+            "ci95": [
+              0.7881311116899604,
+              0.8094562566636974
+            ]
+          },
+          "auprc": {
+            "estimate": 0.3729972979124151,
+            "ci95": [
+              0.34871968648211576,
+              0.3973538151153404
+            ]
+          },
+          "brier": {
+            "estimate": 0.0777656788950564,
+            "ci95": [
+              0.07466320990671652,
+              0.08142480026245774
+            ]
+          },
+          "cal_intercept": {
+            "estimate": 0.016469195915719343,
+            "ci95": [
+              -0.04617545367362812,
+              0.07736441121208276
+            ]
+          },
+          "cal_slope": {
+            "estimate": 1.0616132955674347,
+            "ci95": [
+              0.9996407113834874,
+              1.122960407298267
+            ]
+          },
+          "n": 14288,
+          "events": 1466,
+          "mean_pred": 0.10132244307237565,
+          "obs_rate": 0.10260358342665174
+        }
+      },
+      "paired_differences": {
+        "lightgbm-logistic": {
+          "auroc": {
+            "estimate": -0.0008947147669750022,
+            "ci95": [
+              -0.004649282776026792,
+              0.0025881038564124653
+            ]
+          },
+          "auprc": {
+            "estimate": 0.012843384599065089,
+            "ci95": [
+              0.0024344101704365127,
+              0.02396466436941161
+            ]
+          },
+          "brier": {
+            "estimate": -0.0010130630041074312,
+            "ci95": [
+              -0.001575296999352395,
+              -0.000428280186593687
+            ]
+          }
+        }
+      },
+      "prevalence": 0.10260358342665174,
+      "reliability": {
+        "logistic": [
+          {
+            "mean_pred": 0.0030788708127866536,
+            "obs_rate": 0.0013995801259622112,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.004898247785792014,
+            "obs_rate": 0.0027991602519244225,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.02377857130951004,
+            "obs_rate": 0.026592022393282014,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.04201821080246054,
+            "obs_rate": 0.04338698390482855,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.05977315527074711,
+            "obs_rate": 0.06298110566829951,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.07993415409286989,
+            "obs_rate": 0.09377186843946816,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.10540490177849599,
+            "obs_rate": 0.0979706088173548,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.14080529726613109,
+            "obs_rate": 0.12386284114765571,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.2008170538659298,
+            "obs_rate": 0.19747899159663865,
+            "n": 1428
+          },
+          {
+            "mean_pred": 0.3522919976972803,
+            "obs_rate": 0.3760504201680672,
+            "n": 1428
+          }
+        ],
+        "lightgbm": [
+          {
+            "mean_pred": 0.004170857342514274,
+            "obs_rate": 0.0013995801259622112,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.007312642612245594,
+            "obs_rate": 0.0034989503149055285,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.03421298487697681,
+            "obs_rate": 0.026592022393282014,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.04893914535293309,
+            "obs_rate": 0.04688593421973408,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.060935794984462416,
+            "obs_rate": 0.06368089573128062,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.07886976285332545,
+            "obs_rate": 0.086074177746676,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.10073945742578719,
+            "obs_rate": 0.09517144856543037,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.13186802326656852,
+            "obs_rate": 0.1371588523442967,
+            "n": 1429
+          },
+          {
+            "mean_pred": 0.18409656518139447,
+            "obs_rate": 0.19957983193277312,
+            "n": 1428
+          },
+          {
+            "mean_pred": 0.3623197646677898,
+            "obs_rate": 0.36624649859943975,
+            "n": 1428
+          }
+        ]
+      }
+    }
+  },
+  "phenotypes_test": [
+    {
+      "phenotype": 0,
+      "risk_rank": 0,
+      "n_test": 2921,
+      "share_test": 0.20443729003359462,
+      "test_admission_rate_2009": 0.010270455323519343,
+      "test_high_cost_rate_2009": 0.002396439575487847,
+      "test_mean_predicted_risk": 0.01754812569388918
+    },
+    {
+      "phenotype": 1,
+      "risk_rank": 4,
+      "n_test": 663,
+      "share_test": 0.046402575587905934,
+      "test_admission_rate_2009": 0.27149321266968324,
+      "test_high_cost_rate_2009": 0.17345399698340874,
+      "test_mean_predicted_risk": 0.2647668299877194
+    },
+    {
+      "phenotype": 2,
+      "risk_rank": 3,
+      "n_test": 1376,
+      "share_test": 0.09630459126539753,
+      "test_admission_rate_2009": 0.2754360465116279,
+      "test_high_cost_rate_2009": 0.14680232558139536,
+      "test_mean_predicted_risk": 0.25294714271527585
+    },
+    {
+      "phenotype": 3,
+      "risk_rank": 2,
+      "n_test": 3015,
+      "share_test": 0.21101623740201567,
+      "test_admission_rate_2009": 0.24245439469320065,
+      "test_high_cost_rate_2009": 0.11509121061359867,
+      "test_mean_predicted_risk": 0.23132960134767946
+    },
+    {
+      "phenotype": 4,
+      "risk_rank": 5,
+      "n_test": 708,
+      "share_test": 0.04955207166853304,
+      "test_admission_rate_2009": 0.3333333333333333,
+      "test_high_cost_rate_2009": 0.24858757062146894,
+      "test_mean_predicted_risk": 0.3037892301941395
+    },
+    {
+      "phenotype": 5,
+      "risk_rank": 1,
+      "n_test": 3812,
+      "share_test": 0.2667973124300112,
+      "test_admission_rate_2009": 0.13037775445960126,
+      "test_high_cost_rate_2009": 0.04590766002098636,
+      "test_mean_predicted_risk": 0.13644675387075628
+    },
+    {
+      "phenotype": 6,
+      "risk_rank": 7,
+      "n_test": 675,
+      "share_test": 0.047242441209406495,
+      "test_admission_rate_2009": 0.36,
+      "test_high_cost_rate_2009": 0.24444444444444444,
+      "test_mean_predicted_risk": 0.3491875238535338
+    },
+    {
+      "phenotype": 7,
+      "risk_rank": 6,
+      "n_test": 1118,
+      "share_test": 0.07824748040313549,
+      "test_admission_rate_2009": 0.35778175313059035,
+      "test_high_cost_rate_2009": 0.24955277280858676,
+      "test_mean_predicted_risk": 0.33359638858125074
+    }
+  ],
+  "prescriptive": [
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 286,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 107.0,
+          "realized_avoided": 10.700000000000001,
+          "planned_avoided": 10.283340615115627,
+          "ppv": 0.3741258741258741
+        },
+        "highest_risk": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 15.200000000000001,
+          "planned_avoided": 14.670882090076732,
+          "ppv": 0.5314685314685315
+        },
+        "oracle": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 28.599999999999994,
+          "planned_avoided": 13.84617029798762,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 15.200000000000001,
+          "planned_avoided": 14.670882090076732,
+          "ppv": 0.5314685314685315
+        },
+        "random": {
+          "contacted": 286.0,
+          "contacted_p2.5_p97.5": [
+            286.0,
+            286.0
+          ],
+          "admissions_captured": 53.843,
+          "admissions_captured_p2.5_p97.5": [
+            42.0,
+            67.0
+          ],
+          "realized_avoided": 5.384300000000001,
+          "realized_avoided_p2.5_p97.5": [
+            4.2,
+            6.700000000000001
+          ],
+          "planned_avoided": 5.237105268681036,
+          "planned_avoided_p2.5_p97.5": [
+            4.825012345624202,
+            5.6287067242558715
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            9.100000000000001,
+            12.452499999999999
+          ],
+          "admissions_captured": [
+            91.0,
+            124.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            13.9475,
+            16.852499999999996
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            13.9475,
+            16.852499999999996
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            5.233241531354984,
+            5.557713815789474
+          ],
+          "admissions_captured": [
+            52.33241531354983,
+            55.57713815789474
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 4.5,
+            "ci95": [
+              2.499999999999999,
+              6.552499999999997
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 4.5,
+            "ci95": [
+              2.499999999999999,
+              6.552499999999997
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 9.8157,
+            "ci95": [
+              8.628130249160133,
+              11.431839305711085
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.157,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 9.8157,
+            "ci95": [
+              8.628130249160133,
+              11.431839305711085
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.157,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 15.200000000000001,
+      "greedy_optimized_planned_avoided": 14.670882090076732,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 14.670882090076734,
+      "optimized_relative_gap_to_lp_bound": 1.2108043868757993e-16
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 286,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 107.0,
+          "realized_avoided": 21.400000000000002,
+          "planned_avoided": 20.566681230231254,
+          "ppv": 0.3741258741258741
+        },
+        "highest_risk": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 30.400000000000002,
+          "planned_avoided": 29.341764180153465,
+          "ppv": 0.5314685314685315
+        },
+        "oracle": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 57.19999999999999,
+          "planned_avoided": 27.69234059597524,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 30.400000000000002,
+          "planned_avoided": 29.341764180153465,
+          "ppv": 0.5314685314685315
+        },
+        "random": {
+          "contacted": 286.0,
+          "contacted_p2.5_p97.5": [
+            286.0,
+            286.0
+          ],
+          "admissions_captured": 53.897,
+          "admissions_captured_p2.5_p97.5": [
+            41.0,
+            67.0
+          ],
+          "realized_avoided": 10.7794,
+          "realized_avoided_p2.5_p97.5": [
+            8.200000000000001,
+            13.400000000000002
+          ],
+          "planned_avoided": 10.458317292702056,
+          "planned_avoided_p2.5_p97.5": [
+            9.686548335715408,
+            11.219101854895374
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            18.200000000000003,
+            24.904999999999998
+          ],
+          "admissions_captured": [
+            91.0,
+            124.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            27.895,
+            33.70499999999999
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            27.895,
+            33.70499999999999
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            10.466483062709967,
+            11.115427631578948
+          ],
+          "admissions_captured": [
+            52.33241531354983,
+            55.57713815789474
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 9.0,
+            "ci95": [
+              4.999999999999998,
+              13.104999999999993
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 9.0,
+            "ci95": [
+              4.999999999999998,
+              13.104999999999993
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 19.620600000000003,
+            "ci95": [
+              17.256260498320266,
+              22.86367861142217
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.10300000000001,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 19.620600000000003,
+            "ci95": [
+              17.256260498320266,
+              22.86367861142217
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.10300000000001,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 30.400000000000002,
+      "greedy_optimized_planned_avoided": 29.341764180153465,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 29.34176418015347,
+      "optimized_relative_gap_to_lp_bound": 1.2108043868757993e-16
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 286,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 107.0,
+          "realized_avoided": 32.099999999999994,
+          "planned_avoided": 30.85002184534688,
+          "ppv": 0.3741258741258741
+        },
+        "highest_risk": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 45.599999999999994,
+          "planned_avoided": 44.012646270230206,
+          "ppv": 0.5314685314685315
+        },
+        "oracle": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 85.8,
+          "planned_avoided": 41.53851089396285,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 45.599999999999994,
+          "planned_avoided": 44.012646270230206,
+          "ppv": 0.5314685314685315
+        },
+        "random": {
+          "contacted": 286.0,
+          "contacted_p2.5_p97.5": [
+            286.0,
+            286.0
+          ],
+          "admissions_captured": 53.667,
+          "admissions_captured_p2.5_p97.5": [
+            41.975,
+            67.0
+          ],
+          "realized_avoided": 16.100099999999998,
+          "realized_avoided_p2.5_p97.5": [
+            12.592499999999998,
+            20.099999999999998
+          ],
+          "planned_avoided": 15.665215311469975,
+          "planned_avoided_p2.5_p97.5": [
+            14.510984412396473,
+            16.85898842493817
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            27.3,
+            37.357499999999995
+          ],
+          "admissions_captured": [
+            91.0,
+            124.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            41.8425,
+            50.5575
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            41.8425,
+            50.5575
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            15.69972459406495,
+            16.67314144736842
+          ],
+          "admissions_captured": [
+            52.33241531354983,
+            55.57713815789474
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.5,
+            "ci95": [
+              7.5000000000000036,
+              19.657499999999995
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.5,
+            "ci95": [
+              7.5000000000000036,
+              19.657499999999995
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 29.499899999999997,
+            "ci95": [
+              25.884390747480403,
+              34.29551791713326
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.333,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 29.499899999999997,
+            "ci95": [
+              25.884390747480403,
+              34.29551791713326
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 98.333,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 45.599999999999994,
+      "greedy_optimized_planned_avoided": 44.012646270230206,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 44.01264627023019,
+      "optimized_relative_gap_to_lp_bound": -3.2288116983354657e-16
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 286,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 107.0,
+          "realized_avoided": 13.27142857142857,
+          "planned_avoided": 12.502431794329025,
+          "ppv": 0.3741258741258741
+        },
+        "highest_risk": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 19.428571428571427,
+          "planned_avoided": 18.814239721437126,
+          "ppv": 0.5314685314685315
+        },
+        "oracle": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 78.48571428571428,
+          "planned_avoided": 12.413364642762994,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 114.0,
+          "realized_avoided": 25.285714285714285,
+          "planned_avoided": 26.151860462410347,
+          "ppv": 0.3986013986013986
+        },
+        "random": {
+          "contacted": 286.0,
+          "contacted_p2.5_p97.5": [
+            286.0,
+            286.0
+          ],
+          "admissions_captured": 54.271,
+          "admissions_captured_p2.5_p97.5": [
+            42.975,
+            68.02499999999998
+          ],
+          "realized_avoided": 11.031928571428573,
+          "realized_avoided_p2.5_p97.5": [
+            8.456785714285715,
+            14.072499999999998
+          ],
+          "planned_avoided": 10.798915792970188,
+          "planned_avoided_p2.5_p97.5": [
+            10.067249744599414,
+            11.491755310662969
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            11.335357142857141,
+            15.451071428571424
+          ],
+          "admissions_captured": [
+            91.0,
+            124.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            17.742142857142856,
+            21.793214285714285
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            21.544642857142858,
+            28.81714285714286
+          ],
+          "admissions_captured": [
+            98.0,
+            129.52499999999998
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            10.64308125699888,
+            11.329242771156615
+          ],
+          "admissions_captured": [
+            52.33241531354983,
+            55.57713815789474
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 5.857142857142858,
+            "ci95": [
+              1.7135714285714314,
+              9.585714285714289
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -38.0,
+            "ci95": [
+              -60.0,
+              -19.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 12.014285714285714,
+            "ci95": [
+              8.110000000000001,
+              16.200000000000003
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 7.0,
+            "ci95": [
+              -18.049999999999997,
+              28.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 6.157142857142857,
+            "ci95": [
+              3.5135714285714283,
+              9.360714285714284
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 8.396642857142854,
+            "ci95": [
+              6.860044642857141,
+              10.955279855223162
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 97.729,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 14.253785714285712,
+            "ci95": [
+              10.766899796032636,
+              17.762924432090863
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 59.729,
+            "ci95": [
+              45.36282894736842,
+              75.75548012318029
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 25.285714285714285,
+      "greedy_optimized_planned_avoided": 26.151860462410347,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 26.151860462410347,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 286,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 107.0,
+          "realized_avoided": 29.528571428571432,
+          "planned_avoided": 28.63093066613348,
+          "ppv": 0.3741258741258741
+        },
+        "highest_risk": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 152.0,
+          "realized_avoided": 41.371428571428574,
+          "planned_avoided": 39.869288638869804,
+          "ppv": 0.5314685314685315
+        },
+        "oracle": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 84.57142857142857,
+          "planned_avoided": 33.989794178562406,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 286,
+          "cost_used": 286.0,
+          "admissions_captured": 150.0,
+          "realized_avoided": 42.51428571428571,
+          "planned_avoided": 41.05964044283459,
+          "ppv": 0.5244755244755245
+        },
+        "random": {
+          "contacted": 286.0,
+          "contacted_p2.5_p97.5": [
+            286.0,
+            286.0
+          ],
+          "admissions_captured": 54.153,
+          "admissions_captured_p2.5_p97.5": [
+            42.0,
+            66.0
+          ],
+          "realized_avoided": 10.637985714285714,
+          "realized_avoided_p2.5_p97.5": [
+            8.128214285714286,
+            13.271785714285715
+          ],
+          "planned_avoided": 10.141968312286398,
+          "planned_avoided_p2.5_p97.5": [
+            9.061191532643676,
+            11.198049362012044
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            25.320357142857144,
+            34.515
+          ],
+          "admissions_captured": [
+            91.0,
+            124.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            37.82785714285714,
+            45.926785714285714
+          ],
+          "admissions_captured": [
+            139.475,
+            168.52499999999998
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            38.22642857142857,
+            46.70142857142858
+          ],
+          "admissions_captured": [
+            135.0,
+            165.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            10.24941519356903,
+            10.934675951847705
+          ],
+          "admissions_captured": [
+            52.33241531354983,
+            55.57713815789474
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 1.1428571428571388,
+            "ci95": [
+              -1.828571428571433,
+              3.614285714285714
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -2.0,
+            "ci95": [
+              -14.0,
+              7.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 12.98571428571428,
+            "ci95": [
+              7.434642857142862,
+              17.781785714285718
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 43.0,
+            "ci95": [
+              22.475,
+              61.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 11.842857142857142,
+            "ci95": [
+              6.312857142857141,
+              17.22
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              25.0,
+              65.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 30.73344285714286,
+            "ci95": [
+              27.378824438089907,
+              35.31079587266037
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 97.84700000000001,
+            "ci95": [
+              86.28130249160134,
+              114.31839305711085
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 31.8763,
+            "ci95": [
+              27.753538933770596,
+              36.04137572988322
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 95.84700000000001,
+            "ci95": [
+              81.85790523516238,
+              110.54780585106383
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 42.51428571428571,
+      "greedy_optimized_planned_avoided": 41.05964044283459,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 41.05964044283459,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 714,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 277.0,
+          "realized_avoided": 27.700000000000003,
+          "planned_avoided": 25.49873888059272,
+          "ppv": 0.38795518207282914
+        },
+        "highest_risk": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 34.5,
+          "planned_avoided": 33.13809523472841,
+          "ppv": 0.4831932773109244
+        },
+        "oracle": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 714.0,
+          "realized_avoided": 71.39999999999999,
+          "planned_avoided": 29.87185187853591,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 34.5,
+          "planned_avoided": 33.13809523472841,
+          "ppv": 0.4831932773109244
+        },
+        "random": {
+          "contacted": 714.0,
+          "contacted_p2.5_p97.5": [
+            714.0,
+            714.0
+          ],
+          "admissions_captured": 134.248,
+          "admissions_captured_p2.5_p97.5": [
+            113.975,
+            154.0
+          ],
+          "realized_avoided": 13.424800000000001,
+          "realized_avoided_p2.5_p97.5": [
+            11.3975,
+            15.4
+          ],
+          "planned_avoided": 13.06373323924375,
+          "planned_avoided_p2.5_p97.5": [
+            12.46921297343735,
+            13.706502367261265
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            25.347499999999997,
+            30.6
+          ],
+          "admissions_captured": [
+            253.475,
+            306.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            32.3,
+            36.9
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            32.3,
+            36.9
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            13.06480578107503,
+            13.874851973684212
+          ],
+          "admissions_captured": [
+            130.6480578107503,
+            138.74851973684213
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 6.799999999999997,
+            "ci95": [
+              3.8999999999999986,
+              9.75249999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 6.799999999999997,
+            "ci95": [
+              3.8999999999999986,
+              9.75249999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 21.0752,
+            "ci95": [
+              18.95100783874579,
+              23.33122935330347
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.752,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 21.0752,
+            "ci95": [
+              18.95100783874579,
+              23.33122935330347
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.752,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 34.5,
+      "greedy_optimized_planned_avoided": 33.13809523472841,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 33.13809523472841,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 714,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 277.0,
+          "realized_avoided": 55.400000000000006,
+          "planned_avoided": 50.99747776118544,
+          "ppv": 0.38795518207282914
+        },
+        "highest_risk": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 69.0,
+          "planned_avoided": 66.27619046945682,
+          "ppv": 0.4831932773109244
+        },
+        "oracle": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 714.0,
+          "realized_avoided": 142.79999999999998,
+          "planned_avoided": 59.74370557274182,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 69.0,
+          "planned_avoided": 66.27619046945682,
+          "ppv": 0.4831932773109244
+        },
+        "random": {
+          "contacted": 714.0,
+          "contacted_p2.5_p97.5": [
+            714.0,
+            714.0
+          ],
+          "admissions_captured": 135.094,
+          "admissions_captured_p2.5_p97.5": [
+            117.0,
+            156.02499999999998
+          ],
+          "realized_avoided": 27.018800000000002,
+          "realized_avoided_p2.5_p97.5": [
+            23.400000000000002,
+            31.205
+          ],
+          "planned_avoided": 26.150856633637492,
+          "planned_avoided_p2.5_p97.5": [
+            24.887810111760093,
+            27.433713979836647
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            50.69499999999999,
+            61.2
+          ],
+          "admissions_captured": [
+            253.475,
+            306.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            64.6,
+            73.8
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            64.6,
+            73.8
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            26.12961156215006,
+            27.749703947368424
+          ],
+          "admissions_captured": [
+            130.6480578107503,
+            138.74851973684213
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.599999999999994,
+            "ci95": [
+              7.799999999999997,
+              19.50499999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.599999999999994,
+            "ci95": [
+              7.799999999999997,
+              19.50499999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 41.9812,
+            "ci95": [
+              37.90201567749158,
+              46.66245870660694
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 209.906,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 41.9812,
+            "ci95": [
+              37.90201567749158,
+              46.66245870660694
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 209.906,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 69.0,
+      "greedy_optimized_planned_avoided": 66.27619046945682,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 66.27619046945682,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 714,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 277.0,
+          "realized_avoided": 83.1,
+          "planned_avoided": 76.49621664177818,
+          "ppv": 0.38795518207282914
+        },
+        "highest_risk": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 103.5,
+          "planned_avoided": 99.41428570418522,
+          "ppv": 0.4831932773109244
+        },
+        "oracle": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 714.0,
+          "realized_avoided": 214.19999999999996,
+          "planned_avoided": 89.61555563560772,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 103.5,
+          "planned_avoided": 99.41428570418522,
+          "ppv": 0.4831932773109244
+        },
+        "random": {
+          "contacted": 714.0,
+          "contacted_p2.5_p97.5": [
+            714.0,
+            714.0
+          ],
+          "admissions_captured": 134.665,
+          "admissions_captured_p2.5_p97.5": [
+            116.0,
+            155.0
+          ],
+          "realized_avoided": 40.3995,
+          "realized_avoided_p2.5_p97.5": [
+            34.8,
+            46.5
+          ],
+          "planned_avoided": 39.19661201173301,
+          "planned_avoided_p2.5_p97.5": [
+            37.27766911322602,
+            41.007767958479015
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            76.0425,
+            91.8
+          ],
+          "admissions_captured": [
+            253.475,
+            306.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            96.9,
+            110.69999999999999
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            96.9,
+            110.69999999999999
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            39.19441734322508,
+            41.62455592105263
+          ],
+          "admissions_captured": [
+            130.6480578107503,
+            138.74851973684213
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 20.400000000000006,
+            "ci95": [
+              11.700000000000003,
+              29.257499999999986
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 20.400000000000006,
+            "ci95": [
+              11.700000000000003,
+              29.257499999999986
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 63.1005,
+            "ci95": [
+              56.853023516237414,
+              69.99368805991041
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.335,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 63.1005,
+            "ci95": [
+              56.853023516237414,
+              69.99368805991041
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.335,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 103.5,
+      "greedy_optimized_planned_avoided": 99.41428570418522,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 99.41428570418522,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 714,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 277.0,
+          "realized_avoided": 35.18571428571428,
+          "planned_avoided": 32.08268580600396,
+          "ppv": 0.38795518207282914
+        },
+        "highest_risk": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 48.5,
+          "planned_avoided": 46.35875963865104,
+          "ppv": 0.4831932773109244
+        },
+        "oracle": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 714.0,
+          "realized_avoided": 189.3142857142857,
+          "planned_avoided": 35.14024028354546,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 278.0,
+          "realized_avoided": 59.25714285714285,
+          "planned_avoided": 58.937860245380605,
+          "ppv": 0.38935574229691877
+        },
+        "random": {
+          "contacted": 714.0,
+          "contacted_p2.5_p97.5": [
+            714.0,
+            714.0
+          ],
+          "admissions_captured": 134.377,
+          "admissions_captured_p2.5_p97.5": [
+            115.0,
+            155.0
+          ],
+          "realized_avoided": 27.35547142857143,
+          "realized_avoided_p2.5_p97.5": [
+            23.18535714285714,
+            31.52892857142857
+          ],
+          "planned_avoided": 26.8863970770363,
+          "planned_avoided_p2.5_p97.5": [
+            25.778796219846456,
+            27.97621860213191
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            32.30607142857143,
+            38.98642857142857
+          ],
+          "admissions_captured": [
+            253.475,
+            306.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            44.56392857142857,
+            51.902142857142856
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            53.47571428571429,
+            64.62607142857142
+          ],
+          "admissions_captured": [
+            250.475,
+            303.525
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            26.57048957166853,
+            28.283494190929453
+          ],
+          "admissions_captured": [
+            130.6480578107503,
+            138.74851973684213
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 10.757142857142853,
+            "ci95": [
+              5.468571428571432,
+              16.27607142857142
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -67.0,
+            "ci95": [
+              -95.0,
+              -38.47500000000002
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 24.07142857142857,
+            "ci95": [
+              18.02821428571429,
+              29.91428571428571
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 1.0,
+            "ci95": [
+              -35.525,
+              36.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.314285714285717,
+            "ci95": [
+              8.914285714285711,
+              17.930000000000003
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 21.14452857142857,
+            "ci95": [
+              17.379104943209082,
+              24.483880329147333
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.623,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 31.901671428571422,
+            "ci95": [
+              26.154058350663888,
+              36.89828867381218
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 143.623,
+            "ci95": [
+              116.89581816909293,
+              168.1077547592385
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 59.25714285714285,
+      "greedy_optimized_planned_avoided": 58.937860245380605,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 58.937860245380605,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 714,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 277.0,
+          "realized_avoided": 75.61428571428571,
+          "planned_avoided": 69.91226971636694,
+          "ppv": 0.38795518207282914
+        },
+        "highest_risk": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 345.0,
+          "realized_avoided": 89.5,
+          "planned_avoided": 86.19362130026259,
+          "ppv": 0.4831932773109244
+        },
+        "oracle": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 714.0,
+          "realized_avoided": 198.71428571428572,
+          "planned_avoided": 75.17115169706577,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 714,
+          "cost_used": 714.0,
+          "admissions_captured": 331.0,
+          "realized_avoided": 92.24285714285715,
+          "planned_avoided": 90.56661185316763,
+          "ppv": 0.4635854341736695
+        },
+        "random": {
+          "contacted": 714.0,
+          "contacted_p2.5_p97.5": [
+            714.0,
+            714.0
+          ],
+          "admissions_captured": 134.4,
+          "admissions_captured_p2.5_p97.5": [
+            113.975,
+            156.0
+          ],
+          "realized_avoided": 26.392599999999998,
+          "realized_avoided_p2.5_p97.5": [
+            22.21357142857143,
+            30.586785714285714
+          ],
+          "planned_avoided": 25.344075876724936,
+          "planned_avoided_p2.5_p97.5": [
+            23.752436151999145,
+            27.02397752395621
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            68.94250000000001,
+            83.75142857142856
+          ],
+          "admissions_captured": [
+            253.475,
+            306.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            83.5632142857143,
+            96.04714285714286
+          ],
+          "admissions_captured": [
+            323.0,
+            369.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            86.19107142857143,
+            99.65035714285715
+          ],
+          "admissions_captured": [
+            310.0,
+            357.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            25.58770086786114,
+            27.298456746920497
+          ],
+          "admissions_captured": [
+            130.6480578107503,
+            138.74851973684213
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 2.7428571428571473,
+            "ci95": [
+              -1.8571428571428612,
+              8.38035714285714
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -14.0,
+            "ci95": [
+              -33.0,
+              6.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 16.628571428571433,
+            "ci95": [
+              9.796428571428569,
+              24.146785714285713
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 54.0,
+            "ci95": [
+              30.0,
+              81.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.885714285714286,
+            "ci95": [
+              6.2264285714285705,
+              21.75535714285714
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.0,
+            "ci95": [
+              39.0,
+              97.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 63.1074,
+            "ci95": [
+              57.565056390977446,
+              69.17603568429053
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 210.6,
+            "ci95": [
+              189.510078387458,
+              233.3122935330347
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 65.85025714285715,
+            "ci95": [
+              59.97809160534314,
+              72.82552281634938
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 196.6,
+            "ci95": [
+              175.8189214725644,
+              222.23286324188126
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 92.24285714285715,
+      "greedy_optimized_planned_avoided": 90.56661185316763,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 90.56661185316761,
+      "optimized_relative_gap_to_lp_bound": -1.5691052612458938e-16
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 1429,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 525.0,
+          "realized_avoided": 52.5,
+          "planned_avoided": 49.16039494233148,
+          "ppv": 0.36738978306508047
+        },
+        "highest_risk": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 62.699999999999996,
+          "planned_avoided": 60.057210827397064,
+          "ppv": 0.43876836948915326
+        },
+        "oracle": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 1429.0,
+          "realized_avoided": 142.89999999999998,
+          "planned_avoided": 50.09467971253171,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 62.699999999999996,
+          "planned_avoided": 60.057210827397064,
+          "ppv": 0.43876836948915326
+        },
+        "random": {
+          "contacted": 1429.0,
+          "contacted_p2.5_p97.5": [
+            1429.0,
+            1429.0
+          ],
+          "admissions_captured": 269.042,
+          "admissions_captured_p2.5_p97.5": [
+            241.975,
+            296.0
+          ],
+          "realized_avoided": 26.904200000000003,
+          "realized_avoided_p2.5_p97.5": [
+            24.197499999999998,
+            29.6
+          ],
+          "planned_avoided": 26.16525396800925,
+          "planned_avoided_p2.5_p97.5": [
+            25.2619784561845,
+            27.081047939163405
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            49.2475,
+            56.2
+          ],
+          "admissions_captured": [
+            492.475,
+            562.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            59.0,
+            66.4
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            59.0,
+            66.4
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            26.147909609462488,
+            27.769136513157896
+          ],
+          "admissions_captured": [
+            261.4790960946249,
+            277.69136513157895
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 10.199999999999996,
+            "ci95": [
+              6.3474999999999975,
+              13.752499999999994
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 10.199999999999996,
+            "ci95": [
+              6.3474999999999975,
+              13.752499999999994
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 35.79579999999999,
+            "ci95": [
+              32.405703737402014,
+              39.17391954787232
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.958,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 35.79579999999999,
+            "ci95": [
+              32.405703737402014,
+              39.17391954787232
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.958,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 62.699999999999996,
+      "greedy_optimized_planned_avoided": 60.057210827397064,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 60.057210827397064,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 1429,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 525.0,
+          "realized_avoided": 105.0,
+          "planned_avoided": 98.32078988466296,
+          "ppv": 0.36738978306508047
+        },
+        "highest_risk": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 125.39999999999999,
+          "planned_avoided": 120.11442165479413,
+          "ppv": 0.43876836948915326
+        },
+        "oracle": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 1429.0,
+          "realized_avoided": 285.79999999999995,
+          "planned_avoided": 100.18935942506342,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 125.39999999999999,
+          "planned_avoided": 120.11442165479413,
+          "ppv": 0.43876836948915326
+        },
+        "random": {
+          "contacted": 1429.0,
+          "contacted_p2.5_p97.5": [
+            1429.0,
+            1429.0
+          ],
+          "admissions_captured": 269.064,
+          "admissions_captured_p2.5_p97.5": [
+            243.0,
+            295.0
+          ],
+          "realized_avoided": 53.8128,
+          "realized_avoided_p2.5_p97.5": [
+            48.6,
+            59.0
+          ],
+          "planned_avoided": 52.32804741322895,
+          "planned_avoided_p2.5_p97.5": [
+            50.3813051820114,
+            53.97504889331156
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            98.495,
+            112.4
+          ],
+          "admissions_captured": [
+            492.475,
+            562.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            118.0,
+            132.8
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            118.0,
+            132.8
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            52.295819218924976,
+            55.53827302631579
+          ],
+          "admissions_captured": [
+            261.4790960946249,
+            277.69136513157895
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 20.39999999999999,
+            "ci95": [
+              12.694999999999995,
+              27.50499999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 20.39999999999999,
+            "ci95": [
+              12.694999999999995,
+              27.50499999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 71.5872,
+            "ci95": [
+              64.81140747480403,
+              78.34783909574465
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.936,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 71.5872,
+            "ci95": [
+              64.81140747480403,
+              78.34783909574465
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.936,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 125.39999999999999,
+      "greedy_optimized_planned_avoided": 120.11442165479413,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 120.11442165479413,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 1429,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 525.0,
+          "realized_avoided": 157.5,
+          "planned_avoided": 147.48118482699442,
+          "ppv": 0.36738978306508047
+        },
+        "highest_risk": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 188.10000000000002,
+          "planned_avoided": 180.17163248219117,
+          "ppv": 0.43876836948915326
+        },
+        "oracle": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 1429.0,
+          "realized_avoided": 428.69999999999993,
+          "planned_avoided": 150.2840391375951,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 188.10000000000002,
+          "planned_avoided": 180.17163248219117,
+          "ppv": 0.43876836948915326
+        },
+        "random": {
+          "contacted": 1429.0,
+          "contacted_p2.5_p97.5": [
+            1429.0,
+            1429.0
+          ],
+          "admissions_captured": 269.985,
+          "admissions_captured_p2.5_p97.5": [
+            243.0,
+            299.0
+          ],
+          "realized_avoided": 80.9955,
+          "realized_avoided_p2.5_p97.5": [
+            72.9,
+            89.69999999999999
+          ],
+          "planned_avoided": 78.54929354934262,
+          "planned_avoided_p2.5_p97.5": [
+            76.07096869417205,
+            81.26527063063446
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            147.74249999999998,
+            168.60000000000002
+          ],
+          "admissions_captured": [
+            492.475,
+            562.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            177.0,
+            199.2
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            177.0,
+            199.2
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            78.44372882838746,
+            83.30740953947368
+          ],
+          "admissions_captured": [
+            261.4790960946249,
+            277.69136513157895
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 30.600000000000023,
+            "ci95": [
+              19.042499999999983,
+              41.25749999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 30.600000000000023,
+            "ci95": [
+              19.042499999999983,
+              41.25749999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 107.10450000000002,
+            "ci95": [
+              97.21711121220605,
+              117.52175864361703
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.015,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 107.10450000000002,
+            "ci95": [
+              97.21711121220605,
+              117.52175864361703
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.015,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 188.10000000000002,
+      "greedy_optimized_planned_avoided": 180.17163248219117,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 180.1716324821912,
+      "optimized_relative_gap_to_lp_bound": 1.5774797085891592e-16
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 1429,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 525.0,
+          "realized_avoided": 69.6142857142857,
+          "planned_avoided": 65.22151026531661,
+          "ppv": 0.36738978306508047
+        },
+        "highest_risk": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 93.84285714285714,
+          "planned_avoided": 90.4755515817171,
+          "ppv": 0.43876836948915326
+        },
+        "oracle": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 1429.0,
+          "realized_avoided": 358.07142857142856,
+          "planned_avoided": 75.37398460328477,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 531.0,
+          "realized_avoided": 111.78571428571428,
+          "planned_avoided": 106.94051558339197,
+          "ppv": 0.3715885234429671
+        },
+        "random": {
+          "contacted": 1429.0,
+          "contacted_p2.5_p97.5": [
+            1429.0,
+            1429.0
+          ],
+          "admissions_captured": 269.319,
+          "admissions_captured_p2.5_p97.5": [
+            242.0,
+            298.0
+          ],
+          "realized_avoided": 54.788671428571426,
+          "realized_avoided_p2.5_p97.5": [
+            48.885714285714286,
+            60.71428571428571
+          ],
+          "planned_avoided": 53.84045650974194,
+          "planned_avoided_p2.5_p97.5": [
+            52.357912915072994,
+            55.2445021957448
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            65.02035714285714,
+            75.02142857142856
+          ],
+          "admissions_captured": [
+            492.475,
+            562.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            87.86714285714285,
+            99.40357142857141
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            105.18285714285715,
+            120.55214285714285
+          ],
+          "admissions_captured": [
+            499.95,
+            572.525
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            53.17819271416573,
+            56.60660111882099
+          ],
+          "admissions_captured": [
+            261.4790960946249,
+            277.69136513157895
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 17.942857142857136,
+            "ci95": [
+              11.145357142857133,
+              25.642857142857153
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -96.0,
+            "ci95": [
+              -135.05,
+              -55.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 42.17142857142858,
+            "ci95": [
+              33.578571428571436,
+              51.392142857142844
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 6.0,
+            "ci95": [
+              -41.525,
+              56.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 24.228571428571442,
+            "ci95": [
+              17.367857142857144,
+              30.10000000000001
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 39.054185714285715,
+            "ci95": [
+              33.31967007778754,
+              44.428257503799394
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 357.681,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 56.99704285714285,
+            "ci95": [
+              50.32861164713645,
+              64.94838250879859
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 261.681,
+            "ci95": [
+              230.74983027715564,
+              298.129103093505
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 111.78571428571428,
+      "greedy_optimized_planned_avoided": 106.94051558339197,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 106.94051558339197,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "uniform",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 1429,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 525.0,
+          "realized_avoided": 140.38571428571427,
+          "planned_avoided": 131.4200695040093,
+          "ppv": 0.36738978306508047
+        },
+        "highest_risk": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 627.0,
+          "realized_avoided": 156.95714285714286,
+          "planned_avoided": 149.75329172787116,
+          "ppv": 0.43876836948915326
+        },
+        "oracle": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 1429.0,
+          "realized_avoided": 346.07142857142856,
+          "planned_avoided": 116.42577108400597,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1429,
+          "cost_used": 1429.0,
+          "admissions_captured": 637.0,
+          "realized_avoided": 173.38571428571427,
+          "planned_avoided": 157.88662630508867,
+          "ppv": 0.4457662701189643
+        },
+        "random": {
+          "contacted": 1429.0,
+          "contacted_p2.5_p97.5": [
+            1429.0,
+            1429.0
+          ],
+          "admissions_captured": 270.261,
+          "admissions_captured_p2.5_p97.5": [
+            242.975,
+            298.0
+          ],
+          "realized_avoided": 53.025642857142856,
+          "realized_avoided_p2.5_p97.5": [
+            47.48428571428571,
+            58.785714285714285
+          ],
+          "planned_avoided": 50.75171525037451,
+          "planned_avoided_p2.5_p97.5": [
+            48.33765170963867,
+            53.01903118858583
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            131.33392857142857,
+            150.57571428571427
+          ],
+          "admissions_captured": [
+            492.475,
+            562.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            147.925,
+            166.17000000000002
+          ],
+          "admissions_captured": [
+            590.0,
+            664.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            163.61964285714285,
+            184.35464285714286
+          ],
+          "admissions_captured": [
+            600.0,
+            675.05
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            51.21123885178371,
+            54.63514662653976
+          ],
+          "admissions_captured": [
+            261.4790960946249,
+            277.69136513157895
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 16.428571428571416,
+            "ci95": [
+              9.997142857142844,
+              22.589999999999986
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 10.0,
+            "ci95": [
+              -16.525,
+              36.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 33.0,
+            "ci95": [
+              24.799285714285713,
+              41.53678571428572
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 112.0,
+            "ci95": [
+              80.0,
+              143.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 16.571428571428584,
+            "ci95": [
+              7.220357142857132,
+              25.131428571428557
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 102.0,
+            "ci95": [
+              63.475,
+              137.52499999999998
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 103.9315,
+            "ci95": [
+              95.94395491721323,
+              112.54637545492722
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 356.739,
+            "ci95": [
+              324.0570373740201,
+              391.7391954787234
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 120.36007142857142,
+            "ci95": [
+              111.02020464225724,
+              130.37662501499761
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 366.739,
+            "ci95": [
+              332.237304031355,
+              402.31428296472563
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 173.38571428571427,
+      "greedy_optimized_planned_avoided": 157.88662630508867,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 157.88662630508867,
+      "optimized_relative_gap_to_lp_bound": 0.0
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 1716.0,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 227,
+          "cost_used": 1716.0,
+          "admissions_captured": 83.0,
+          "realized_avoided": 8.299999999999999,
+          "planned_avoided": 7.985912722941572,
+          "ppv": 0.3656387665198238
+        },
+        "highest_risk": {
+          "contacted": 230,
+          "cost_used": 1715.4285714285716,
+          "admissions_captured": 130.0,
+          "realized_avoided": 12.999999999999998,
+          "planned_avoided": 12.052388455490615,
+          "ppv": 0.5652173913043478
+        },
+        "oracle": {
+          "contacted": 379,
+          "cost_used": 1715.428571428571,
+          "admissions_captured": 379.0,
+          "realized_avoided": 37.9,
+          "planned_avoided": 5.829243935081173,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 283,
+          "cost_used": 1716.0,
+          "admissions_captured": 143.0,
+          "realized_avoided": 14.3,
+          "planned_avoided": 13.119483017317465,
+          "ppv": 0.5053003533568905
+        },
+        "random": {
+          "contacted": 325.795,
+          "contacted_p2.5_p97.5": [
+            318.0,
+            333.0
+          ],
+          "admissions_captured": 61.402,
+          "admissions_captured_p2.5_p97.5": [
+            49.0,
+            74.0
+          ],
+          "realized_avoided": 6.1402,
+          "realized_avoided_p2.5_p97.5": [
+            4.9,
+            7.4
+          ],
+          "planned_avoided": 5.96655206751187,
+          "planned_avoided_p2.5_p97.5": [
+            5.634270841814936,
+            6.285928105920436
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            6.800000000000001,
+            9.799999999999999
+          ],
+          "admissions_captured": [
+            68.0,
+            98.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            11.747499999999997,
+            14.399999999999999
+          ],
+          "admissions_captured": [
+            117.475,
+            144.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            12.747500000000002,
+            16.0
+          ],
+          "admissions_captured": [
+            127.475,
+            160.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            5.78,
+            6.472625
+          ],
+          "admissions_captured": [
+            57.8,
+            64.72625
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 1.3000000000000025,
+            "ci95": [
+              -0.2999999999999963,
+              2.852499999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 13.0,
+            "ci95": [
+              -3.0,
+              28.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 6.000000000000002,
+            "ci95": [
+              3.9000000000000012,
+              8.052499999999997
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 60.0,
+            "ci95": [
+              39.0,
+              80.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 4.699999999999999,
+            "ci95": [
+              2.8999999999999986,
+              6.399999999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 47.0,
+            "ci95": [
+              29.0,
+              64.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 6.859799999999998,
+            "ci95": [
+              5.602374999999998,
+              8.239999999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.598,
+            "ci95": [
+              56.02375,
+              82.4
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 8.1598,
+            "ci95": [
+              6.437125,
+              9.718124999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 81.598,
+            "ci95": [
+              64.37125,
+              97.18124999999999
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 14.3,
+      "greedy_optimized_planned_avoided": 13.115852305475908,
+      "ilp_minus_greedy_planned_avoided": 0.003630711841557499,
+      "lp_upper_bound_planned_avoided": 13.119500838969344,
+      "optimized_relative_gap_to_lp_bound": 1.3584092944873936e-06
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 1716.0,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 227,
+          "cost_used": 1716.0,
+          "admissions_captured": 83.0,
+          "realized_avoided": 16.599999999999998,
+          "planned_avoided": 15.971825445883145,
+          "ppv": 0.3656387665198238
+        },
+        "highest_risk": {
+          "contacted": 230,
+          "cost_used": 1715.4285714285716,
+          "admissions_captured": 130.0,
+          "realized_avoided": 25.999999999999996,
+          "planned_avoided": 24.10477691098123,
+          "ppv": 0.5652173913043478
+        },
+        "oracle": {
+          "contacted": 379,
+          "cost_used": 1715.428571428571,
+          "admissions_captured": 379.0,
+          "realized_avoided": 75.8,
+          "planned_avoided": 11.658487870162347,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 283,
+          "cost_used": 1716.0,
+          "admissions_captured": 144.0,
+          "realized_avoided": 28.799999999999997,
+          "planned_avoided": 26.23893421727677,
+          "ppv": 0.508833922261484
+        },
+        "random": {
+          "contacted": 325.888,
+          "contacted_p2.5_p97.5": [
+            318.0,
+            333.0
+          ],
+          "admissions_captured": 61.623,
+          "admissions_captured_p2.5_p97.5": [
+            48.0,
+            75.0
+          ],
+          "realized_avoided": 12.3246,
+          "realized_avoided_p2.5_p97.5": [
+            9.600000000000001,
+            15.0
+          ],
+          "planned_avoided": 11.930074371719984,
+          "planned_avoided_p2.5_p97.5": [
+            11.2789241384806,
+            12.59227869355258
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            13.600000000000001,
+            19.599999999999998
+          ],
+          "admissions_captured": [
+            68.0,
+            98.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            23.494999999999994,
+            28.799999999999997
+          ],
+          "admissions_captured": [
+            117.475,
+            144.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            25.495000000000005,
+            32.0
+          ],
+          "admissions_captured": [
+            127.475,
+            160.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            11.54475,
+            13.010000000000002
+          ],
+          "admissions_captured": [
+            57.72375,
+            65.05
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 2.8000000000000007,
+            "ci95": [
+              -0.5999999999999927,
+              5.704999999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 14.0,
+            "ci95": [
+              -3.0,
+              28.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 12.2,
+            "ci95": [
+              7.8000000000000025,
+              16.104999999999993
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 61.0,
+            "ci95": [
+              39.0,
+              80.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 9.399999999999999,
+            "ci95": [
+              5.799999999999997,
+              12.799999999999995
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 47.0,
+            "ci95": [
+              29.0,
+              64.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 13.675399999999996,
+            "ci95": [
+              11.051249999999994,
+              16.588249999999995
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.37700000000001,
+            "ci95": [
+              55.25625,
+              82.94124999999998
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 16.475399999999997,
+            "ci95": [
+              12.98125,
+              19.357249999999997
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 82.37700000000001,
+            "ci95": [
+              64.90625,
+              96.78625
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 28.6,
+      "greedy_optimized_planned_avoided": 26.231704610951816,
+      "ilp_minus_greedy_planned_avoided": 0.0072296063249552844,
+      "lp_upper_bound_planned_avoided": 26.23900167793869,
+      "optimized_relative_gap_to_lp_bound": 2.5710071878922005e-06
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 1716.0,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 227,
+          "cost_used": 1716.0,
+          "admissions_captured": 83.0,
+          "realized_avoided": 24.9,
+          "planned_avoided": 23.95773816882472,
+          "ppv": 0.3656387665198238
+        },
+        "highest_risk": {
+          "contacted": 230,
+          "cost_used": 1715.4285714285716,
+          "admissions_captured": 130.0,
+          "realized_avoided": 39.0,
+          "planned_avoided": 36.157165366471844,
+          "ppv": 0.5652173913043478
+        },
+        "oracle": {
+          "contacted": 379,
+          "cost_used": 1715.428571428571,
+          "admissions_captured": 379.0,
+          "realized_avoided": 113.69999999999997,
+          "planned_avoided": 17.48773180524352,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 283,
+          "cost_used": 1716.0,
+          "admissions_captured": 143.0,
+          "realized_avoided": 42.9,
+          "planned_avoided": 39.35844905195239,
+          "ppv": 0.5053003533568905
+        },
+        "random": {
+          "contacted": 325.876,
+          "contacted_p2.5_p97.5": [
+            318.0,
+            334.0
+          ],
+          "admissions_captured": 61.705,
+          "admissions_captured_p2.5_p97.5": [
+            49.0,
+            75.0
+          ],
+          "realized_avoided": 18.5115,
+          "realized_avoided_p2.5_p97.5": [
+            14.7,
+            22.5
+          ],
+          "planned_avoided": 17.900384297343013,
+          "planned_avoided_p2.5_p97.5": [
+            16.848003052097404,
+            18.876524621227734
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            20.400000000000002,
+            29.4
+          ],
+          "admissions_captured": [
+            68.0,
+            98.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            35.24250000000001,
+            43.2
+          ],
+          "admissions_captured": [
+            117.475,
+            144.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            38.2425,
+            48.0
+          ],
+          "admissions_captured": [
+            127.475,
+            160.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            17.474999999999998,
+            19.365000000000002
+          ],
+          "admissions_captured": [
+            58.25,
+            64.55
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 3.8999999999999986,
+            "ci95": [
+              -0.8999999999999952,
+              8.557499999999994
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 13.0,
+            "ci95": [
+              -3.0,
+              28.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 18.0,
+            "ci95": [
+              11.699999999999996,
+              24.15749999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 60.0,
+            "ci95": [
+              39.0,
+              80.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 14.100000000000001,
+            "ci95": [
+              8.7,
+              19.2
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 47.0,
+            "ci95": [
+              29.0,
+              64.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 20.4885,
+            "ci95": [
+              16.87425,
+              25.195124999999994
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.295,
+            "ci95": [
+              56.2475,
+              83.98375
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 24.388499999999997,
+            "ci95": [
+              19.777125000000005,
+              29.520000000000003
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 81.295,
+            "ci95": [
+              65.92375,
+              98.4
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 42.9,
+      "greedy_optimized_planned_avoided": 39.34755691642772,
+      "ilp_minus_greedy_planned_avoided": 0.01089213552467072,
+      "lp_upper_bound_planned_avoided": 39.358502516908025,
+      "optimized_relative_gap_to_lp_bound": 1.358409294442261e-06
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 1716.0,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 227,
+          "cost_used": 1716.0,
+          "admissions_captured": 83.0,
+          "realized_avoided": 10.271428571428569,
+          "planned_avoided": 9.596887106676729,
+          "ppv": 0.3656387665198238
+        },
+        "highest_risk": {
+          "contacted": 230,
+          "cost_used": 1715.4285714285716,
+          "admissions_captured": 130.0,
+          "realized_avoided": 16.457142857142856,
+          "planned_avoided": 15.287744470968136,
+          "ppv": 0.5652173913043478
+        },
+        "oracle": {
+          "contacted": 379,
+          "cost_used": 1715.428571428571,
+          "admissions_captured": 379.0,
+          "realized_avoided": 103.72857142857141,
+          "planned_avoided": 15.851781004563016,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 329,
+          "cost_used": 1715.9999999999998,
+          "admissions_captured": 118.0,
+          "realized_avoided": 28.0,
+          "planned_avoided": 29.139901274233743,
+          "ppv": 0.3586626139817629
+        },
+        "random": {
+          "contacted": 325.828,
+          "contacted_p2.5_p97.5": [
+            318.0,
+            333.0
+          ],
+          "admissions_captured": 61.551,
+          "admissions_captured_p2.5_p97.5": [
+            48.0,
+            75.0
+          ],
+          "realized_avoided": 12.545757142857141,
+          "realized_avoided_p2.5_p97.5": [
+            9.698571428571428,
+            15.772499999999997
+          ],
+          "planned_avoided": 12.264807672933461,
+          "planned_avoided_p2.5_p97.5": [
+            11.5562898088336,
+            12.89337983223397
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            8.327857142857141,
+            11.98035714285714
+          ],
+          "admissions_captured": [
+            68.0,
+            98.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            14.84285714285714,
+            18.57142857142857
+          ],
+          "admissions_captured": [
+            117.475,
+            144.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            23.760357142857142,
+            31.74285714285714
+          ],
+          "admissions_captured": [
+            100.475,
+            133.52499999999998
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            11.820017857142856,
+            13.192874999999995
+          ],
+          "admissions_captured": [
+            58.245,
+            64.75
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 11.542857142857144,
+            "ci95": [
+              7.199285714285717,
+              15.05857142857143
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -12.0,
+            "ci95": [
+              -35.0,
+              7.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 17.72857142857143,
+            "ci95": [
+              13.425357142857143,
+              21.74785714285714
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 35.0,
+            "ci95": [
+              12.475000000000001,
+              58.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 6.185714285714287,
+            "ci95": [
+              3.889642857142858,
+              8.821785714285715
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 47.0,
+            "ci95": [
+              29.0,
+              64.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 3.9113857142857142,
+            "ci95": [
+              2.2810357142857156,
+              6.075232142857137
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 68.449,
+            "ci95": [
+              55.7475,
+              83.14874999999998
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 15.454242857142859,
+            "ci95": [
+              11.25605357142857,
+              19.237107142857138
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 56.449,
+            "ci95": [
+              39.01125,
+              71.905
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 27.514285714285712,
+      "greedy_optimized_planned_avoided": 29.112215327271436,
+      "ilp_minus_greedy_planned_avoided": 0.02768594696230764,
+      "lp_upper_bound_planned_avoided": 29.140624281207415,
+      "optimized_relative_gap_to_lp_bound": 2.4810963783585638e-05
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.02,
+      "capacity_slots": 286,
+      "budget": 1716.0,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 227,
+          "cost_used": 1716.0,
+          "admissions_captured": 83.0,
+          "realized_avoided": 22.92857142857143,
+          "planned_avoided": 22.34676378508956,
+          "ppv": 0.3656387665198238
+        },
+        "highest_risk": {
+          "contacted": 230,
+          "cost_used": 1715.4285714285716,
+          "admissions_captured": 130.0,
+          "realized_avoided": 35.542857142857144,
+          "planned_avoided": 32.92180935099432,
+          "ppv": 0.5652173913043478
+        },
+        "oracle": {
+          "contacted": 215,
+          "cost_used": 1716.0,
+          "admissions_captured": 215.0,
+          "realized_avoided": 64.29999999999998,
+          "planned_avoided": 25.431031480847516,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 226,
+          "cost_used": 1716.0000000000002,
+          "admissions_captured": 128.0,
+          "realized_avoided": 35.542857142857144,
+          "planned_avoided": 33.044797820537916,
+          "ppv": 0.5663716814159292
+        },
+        "random": {
+          "contacted": 325.836,
+          "contacted_p2.5_p97.5": [
+            318.0,
+            334.0
+          ],
+          "admissions_captured": 60.939,
+          "admissions_captured_p2.5_p97.5": [
+            48.0,
+            75.0
+          ],
+          "realized_avoided": 11.96487142857143,
+          "realized_avoided_p2.5_p97.5": [
+            9.39857142857143,
+            14.70142857142857
+          ],
+          "planned_avoided": 11.566817065205766,
+          "planned_avoided_p2.5_p97.5": [
+            10.656048564830696,
+            12.512921240717688
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            18.87071428571429,
+            27.178928571428575
+          ],
+          "admissions_captured": [
+            68.0,
+            98.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            31.957142857142863,
+            39.18035714285714
+          ],
+          "admissions_captured": [
+            117.475,
+            144.0
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            31.583571428571428,
+            39.18107142857143
+          ],
+          "admissions_captured": [
+            114.0,
+            142.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            11.360714285714286,
+            12.845803571428574
+          ],
+          "admissions_captured": [
+            58.07375,
+            65.05
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              -1.9721428571428608,
+              1.8035714285714257
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -2.0,
+            "ci95": [
+              -10.0,
+              5.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 12.614285714285714,
+            "ci95": [
+              7.148928571428566,
+              16.658571428571424
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 45.0,
+            "ci95": [
+              26.0,
+              60.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 12.614285714285714,
+            "ci95": [
+              7.443928571428576,
+              17.131428571428568
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 47.0,
+            "ci95": [
+              29.0,
+              64.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 23.577985714285717,
+            "ci95": [
+              19.899892857142863,
+              27.25782142857142
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 69.061,
+            "ci95": [
+              55.79,
+              82.96749999999999
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 23.577985714285717,
+            "ci95": [
+              19.243803571428575,
+              27.172107142857136
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 67.061,
+            "ci95": [
+              51.10875,
+              80.205
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 35.57142857142857,
+      "greedy_optimized_planned_avoided": 33.02507347624135,
+      "ilp_minus_greedy_planned_avoided": 0.01972434429656289,
+      "lp_upper_bound_planned_avoided": 33.04501464145837,
+      "optimized_relative_gap_to_lp_bound": 6.56138067449712e-06
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 4284.0,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 574,
+          "cost_used": 4284.0,
+          "admissions_captured": 223.0,
+          "realized_avoided": 22.3,
+          "planned_avoided": 20.637912899659725,
+          "ppv": 0.3885017421602787
+        },
+        "highest_risk": {
+          "contacted": 592,
+          "cost_used": 4283.428571428572,
+          "admissions_captured": 297.0,
+          "realized_avoided": 29.7,
+          "planned_avoided": 28.101243613085334,
+          "ppv": 0.5016891891891891
+        },
+        "oracle": {
+          "contacted": 895,
+          "cost_used": 4283.999999999998,
+          "admissions_captured": 894.0,
+          "realized_avoided": 89.4,
+          "planned_avoided": 18.165259994872656,
+          "ppv": 0.9988826815642458
+        },
+        "optimized": {
+          "contacted": 698,
+          "cost_used": 4284.0,
+          "admissions_captured": 306.0,
+          "realized_avoided": 30.6,
+          "planned_avoided": 30.054349871056136,
+          "ppv": 0.4383954154727794
+        },
+        "random": {
+          "contacted": 813.915,
+          "contacted_p2.5_p97.5": [
+            802.0,
+            827.0
+          ],
+          "admissions_captured": 153.169,
+          "admissions_captured_p2.5_p97.5": [
+            133.0,
+            175.0
+          ],
+          "realized_avoided": 15.316900000000002,
+          "realized_avoided_p2.5_p97.5": [
+            13.3,
+            17.5
+          ],
+          "planned_avoided": 14.891650582702656,
+          "planned_avoided_p2.5_p97.5": [
+            14.381518023045272,
+            15.41962146923951
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            20.3475,
+            25.1525
+          ],
+          "admissions_captured": [
+            203.475,
+            251.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            27.5475,
+            32.10499999999999
+          ],
+          "admissions_captured": [
+            275.475,
+            321.04999999999995
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            27.9,
+            33.2
+          ],
+          "admissions_captured": [
+            279.0,
+            332.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            14.700000000000001,
+            16.04075
+          ],
+          "admissions_captured": [
+            147.0,
+            160.4075
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.9000000000000021,
+            "ci95": [
+              -1.2999999999999954,
+              3.200000000000001
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 9.0,
+            "ci95": [
+              -13.0,
+              32.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 8.3,
+            "ci95": [
+              5.142500000000001,
+              11.004999999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 83.0,
+            "ci95": [
+              51.425000000000004,
+              110.04999999999995
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 7.399999999999999,
+            "ci95": [
+              4.599999999999998,
+              10.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 74.0,
+            "ci95": [
+              46.0,
+              100.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 14.383099999999997,
+            "ci95": [
+              12.2745,
+              16.715749999999996
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 143.831,
+            "ci95": [
+              122.745,
+              167.1575
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 15.2831,
+            "ci95": [
+              12.649875,
+              17.884625
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 152.831,
+            "ci95": [
+              126.49875,
+              178.84624999999997
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 30.6,
+      "greedy_optimized_planned_avoided": 30.04723134070983,
+      "ilp_minus_greedy_planned_avoided": 0.0071185303463074945,
+      "lp_upper_bound_planned_avoided": 30.054376295008176,
+      "optimized_relative_gap_to_lp_bound": 8.792048046648974e-07
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 4284.0,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 574,
+          "cost_used": 4284.0,
+          "admissions_captured": 223.0,
+          "realized_avoided": 44.6,
+          "planned_avoided": 41.27582579931945,
+          "ppv": 0.3885017421602787
+        },
+        "highest_risk": {
+          "contacted": 592,
+          "cost_used": 4283.428571428572,
+          "admissions_captured": 297.0,
+          "realized_avoided": 59.4,
+          "planned_avoided": 56.20248722617067,
+          "ppv": 0.5016891891891891
+        },
+        "oracle": {
+          "contacted": 895,
+          "cost_used": 4283.999999999998,
+          "admissions_captured": 894.0,
+          "realized_avoided": 178.8,
+          "planned_avoided": 36.33051998974531,
+          "ppv": 0.9988826815642458
+        },
+        "optimized": {
+          "contacted": 698,
+          "cost_used": 4284.0,
+          "admissions_captured": 306.0,
+          "realized_avoided": 61.2,
+          "planned_avoided": 60.10869974211227,
+          "ppv": 0.4383954154727794
+        },
+        "random": {
+          "contacted": 813.623,
+          "contacted_p2.5_p97.5": [
+            802.0,
+            825.025
+          ],
+          "admissions_captured": 153.444,
+          "admissions_captured_p2.5_p97.5": [
+            134.975,
+            174.0
+          ],
+          "realized_avoided": 30.688800000000004,
+          "realized_avoided_p2.5_p97.5": [
+            26.995,
+            34.8
+          ],
+          "planned_avoided": 29.801816424493015,
+          "planned_avoided_p2.5_p97.5": [
+            28.82151614313511,
+            30.796050241186965
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            40.695,
+            50.305
+          ],
+          "admissions_captured": [
+            203.475,
+            251.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            55.095,
+            64.20999999999998
+          ],
+          "admissions_captured": [
+            275.475,
+            321.04999999999995
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            55.8,
+            66.4
+          ],
+          "admissions_captured": [
+            279.0,
+            332.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            29.43225,
+            31.930499999999995
+          ],
+          "admissions_captured": [
+            147.16125,
+            159.65249999999997
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 1.8000000000000043,
+            "ci95": [
+              -2.5999999999999908,
+              6.400000000000002
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 9.0,
+            "ci95": [
+              -13.0,
+              32.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 16.6,
+            "ci95": [
+              10.285000000000002,
+              22.009999999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 83.0,
+            "ci95": [
+              51.425000000000004,
+              110.04999999999995
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 14.799999999999997,
+            "ci95": [
+              9.199999999999996,
+              20.0
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 74.0,
+            "ci95": [
+              46.0,
+              100.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 28.711199999999995,
+            "ci95": [
+              24.316750000000003,
+              33.02525
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 143.556,
+            "ci95": [
+              121.58375,
+              165.12625
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 30.5112,
+            "ci95": [
+              25.20125000000001,
+              35.2225
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 152.556,
+            "ci95": [
+              126.00625000000001,
+              176.11249999999998
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 61.2,
+      "greedy_optimized_planned_avoided": 60.09446268141966,
+      "ilp_minus_greedy_planned_avoided": 0.014237060692614989,
+      "lp_upper_bound_planned_avoided": 60.10875259001635,
+      "optimized_relative_gap_to_lp_bound": 8.792048046648974e-07
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 4284.0,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 574,
+          "cost_used": 4284.0,
+          "admissions_captured": 223.0,
+          "realized_avoided": 66.9,
+          "planned_avoided": 61.91373869897917,
+          "ppv": 0.3885017421602787
+        },
+        "highest_risk": {
+          "contacted": 592,
+          "cost_used": 4283.428571428572,
+          "admissions_captured": 297.0,
+          "realized_avoided": 89.1,
+          "planned_avoided": 84.30373083925599,
+          "ppv": 0.5016891891891891
+        },
+        "oracle": {
+          "contacted": 895,
+          "cost_used": 4283.999999999998,
+          "admissions_captured": 894.0,
+          "realized_avoided": 268.19999999999993,
+          "planned_avoided": 54.49577998461797,
+          "ppv": 0.9988826815642458
+        },
+        "optimized": {
+          "contacted": 698,
+          "cost_used": 4284.0,
+          "admissions_captured": 306.0,
+          "realized_avoided": 91.79999999999998,
+          "planned_avoided": 90.16304961316841,
+          "ppv": 0.4383954154727794
+        },
+        "random": {
+          "contacted": 813.884,
+          "contacted_p2.5_p97.5": [
+            802.0,
+            826.0
+          ],
+          "admissions_captured": 153.588,
+          "admissions_captured_p2.5_p97.5": [
+            133.0,
+            174.0
+          ],
+          "realized_avoided": 46.0764,
+          "realized_avoided_p2.5_p97.5": [
+            39.9,
+            52.199999999999996
+          ],
+          "planned_avoided": 44.65585421139191,
+          "planned_avoided_p2.5_p97.5": [
+            43.176441962672406,
+            46.142024536779985
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            61.0425,
+            75.45749999999998
+          ],
+          "admissions_captured": [
+            203.475,
+            251.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            82.64250000000001,
+            96.31499999999998
+          ],
+          "admissions_captured": [
+            275.475,
+            321.04999999999995
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            83.69999999999999,
+            99.6
+          ],
+          "admissions_captured": [
+            279.0,
+            332.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            43.72425,
+            48.165
+          ],
+          "admissions_captured": [
+            145.7475,
+            160.55
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 2.6999999999999886,
+            "ci95": [
+              -3.899999999999999,
+              9.599999999999994
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 9.0,
+            "ci95": [
+              -13.0,
+              32.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 24.899999999999977,
+            "ci95": [
+              15.427500000000004,
+              33.01499999999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 83.0,
+            "ci95": [
+              51.425000000000004,
+              110.04999999999995
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 22.19999999999999,
+            "ci95": [
+              13.800000000000011,
+              30.000000000000007
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 74.0,
+            "ci95": [
+              46.0,
+              100.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 43.023599999999995,
+            "ci95": [
+              36.656250000000014,
+              49.943625
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 143.412,
+            "ci95": [
+              122.18749999999999,
+              166.47875000000002
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 45.72359999999998,
+            "ci95": [
+              37.176375,
+              53.256374999999984
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 152.412,
+            "ci95": [
+              123.92125,
+              177.52124999999995
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 91.79999999999998,
+      "greedy_optimized_planned_avoided": 90.14169402212949,
+      "ilp_minus_greedy_planned_avoided": 0.021355591038926036,
+      "lp_upper_bound_planned_avoided": 90.1631288850245,
+      "optimized_relative_gap_to_lp_bound": 8.792048043890754e-07
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 4284.0,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 574,
+          "cost_used": 4284.0,
+          "admissions_captured": 223.0,
+          "realized_avoided": 28.128571428571426,
+          "planned_avoided": 25.831028052743555,
+          "ppv": 0.3885017421602787
+        },
+        "highest_risk": {
+          "contacted": 592,
+          "cost_used": 4283.428571428572,
+          "admissions_captured": 297.0,
+          "realized_avoided": 41.41428571428571,
+          "planned_avoided": 38.57228561060974,
+          "ppv": 0.5016891891891891
+        },
+        "oracle": {
+          "contacted": 895,
+          "cost_used": 4283.999999999998,
+          "admissions_captured": 894.0,
+          "realized_avoided": 233.02857142857138,
+          "planned_avoided": 46.27147250584291,
+          "ppv": 0.9988826815642458
+        },
+        "optimized": {
+          "contacted": 818,
+          "cost_used": 4284.0,
+          "admissions_captured": 272.0,
+          "realized_avoided": 63.91428571428571,
+          "planned_avoided": 64.79878912278038,
+          "ppv": 0.33251833740831294
+        },
+        "random": {
+          "contacted": 814.166,
+          "contacted_p2.5_p97.5": [
+            802.0,
+            826.0
+          ],
+          "admissions_captured": 153.596,
+          "admissions_captured_p2.5_p97.5": [
+            132.0,
+            174.0
+          ],
+          "realized_avoided": 31.273514285714285,
+          "realized_avoided_p2.5_p97.5": [
+            26.555,
+            35.68678571428571
+          ],
+          "planned_avoided": 30.646777561817565,
+          "planned_avoided_p2.5_p97.5": [
+            29.594929272475643,
+            31.701528506975187
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            25.592499999999998,
+            31.59535714285714
+          ],
+          "admissions_captured": [
+            203.475,
+            251.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            37.99107142857142,
+            44.97892857142857
+          ],
+          "admissions_captured": [
+            275.475,
+            321.04999999999995
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            58.07821428571429,
+            70.5825
+          ],
+          "admissions_captured": [
+            247.0,
+            299.525
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            29.922678571428573,
+            32.6895
+          ],
+          "admissions_captured": [
+            147.29749999999999,
+            160.22875000000002
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 22.5,
+            "ci95": [
+              16.095714285714287,
+              29.41607142857142
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -25.0,
+            "ci95": [
+              -54.0,
+              9.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 35.785714285714285,
+            "ci95": [
+              29.135714285714286,
+              43.683214285714286
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 49.0,
+            "ci95": [
+              16.0,
+              86.52499999999998
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 13.285714285714285,
+            "ci95": [
+              9.228928571428574,
+              17.157857142857143
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 74.0,
+            "ci95": [
+              46.0,
+              100.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 10.140771428571426,
+            "ci95": [
+              6.51946428571428,
+              13.718928571428565
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 143.404,
+            "ci95": [
+              121.96625,
+              165.88125
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 32.640771428571426,
+            "ci95": [
+              26.877017857142864,
+              39.212678571428555
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.404,
+            "ci95": [
+              92.97625000000001,
+              146.30249999999998
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 64.07142857142856,
+      "greedy_optimized_planned_avoided": 64.76139257242689,
+      "ilp_minus_greedy_planned_avoided": 0.037396550353491875,
+      "lp_upper_bound_planned_avoided": 64.79882067051265,
+      "optimized_relative_gap_to_lp_bound": 4.868565808877458e-07
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.05,
+      "capacity_slots": 714,
+      "budget": 4284.0,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 574,
+          "cost_used": 4284.0,
+          "admissions_captured": 223.0,
+          "realized_avoided": 61.07142857142858,
+          "planned_avoided": 56.72062354589535,
+          "ppv": 0.3885017421602787
+        },
+        "highest_risk": {
+          "contacted": 592,
+          "cost_used": 4283.428571428572,
+          "admissions_captured": 297.0,
+          "realized_avoided": 77.38571428571429,
+          "planned_avoided": 73.8326888417316,
+          "ppv": 0.5016891891891891
+        },
+        "oracle": {
+          "contacted": 558,
+          "cost_used": 4284.0,
+          "admissions_captured": 558.0,
+          "realized_avoided": 158.4,
+          "planned_avoided": 61.996868552635135,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 573,
+          "cost_used": 4284.0,
+          "admissions_captured": 286.0,
+          "realized_avoided": 77.8857142857143,
+          "planned_avoided": 74.37028586575019,
+          "ppv": 0.49912739965095987
+        },
+        "random": {
+          "contacted": 813.898,
+          "contacted_p2.5_p97.5": [
+            802.0,
+            825.0
+          ],
+          "admissions_captured": 154.004,
+          "admissions_captured_p2.5_p97.5": [
+            135.0,
+            176.0
+          ],
+          "realized_avoided": 30.210228571428573,
+          "realized_avoided_p2.5_p97.5": [
+            26.2275,
+            34.53071428571429
+          ],
+          "planned_avoided": 28.90452165474492,
+          "planned_avoided_p2.5_p97.5": [
+            27.555540873557817,
+            30.270147798859494
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            55.535357142857144,
+            68.69642857142857
+          ],
+          "admissions_captured": [
+            203.475,
+            251.52499999999998
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            72.00535714285715,
+            83.76071428571429
+          ],
+          "admissions_captured": [
+            275.475,
+            321.04999999999995
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            72.1557142857143,
+            83.81500000000001
+          ],
+          "admissions_captured": [
+            264.475,
+            307.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            28.833125,
+            31.582696428571428
+          ],
+          "admissions_captured": [
+            147.07375,
+            160.6025
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.5000000000000142,
+            "ci95": [
+              -3.500714285714286,
+              4.004285714285717
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -11.0,
+            "ci95": [
+              -26.0,
+              4.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 16.814285714285724,
+            "ci95": [
+              9.149642857142856,
+              23.893928571428564
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 63.0,
+            "ci95": [
+              35.425000000000004,
+              89.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 16.31428571428571,
+            "ci95": [
+              9.404642857142864,
+              23.05857142857143
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 74.0,
+            "ci95": [
+              46.0,
+              100.0
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 47.17548571428571,
+            "ci95": [
+              42.204214285714286,
+              53.37014285714285
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 142.996,
+            "ci95": [
+              122.89250000000001,
+              167.28374999999997
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 47.67548571428573,
+            "ci95": [
+              42.34892857142857,
+              53.49930357142858
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 131.996,
+            "ci95": [
+              111.94500000000001,
+              154.96249999999995
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 77.8857142857143,
+      "greedy_optimized_planned_avoided": 74.37028586575019,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 74.37039907705893,
+      "optimized_relative_gap_to_lp_bound": 1.5222630259969392e-06
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 8574.0,
+      "effect_scenario": "U10",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1166,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 435.0,
+          "realized_avoided": 43.5,
+          "planned_avoided": 40.67494718426704,
+          "ppv": 0.3730703259005146
+        },
+        "highest_risk": {
+          "contacted": 1222,
+          "cost_used": 8573.142857142859,
+          "admissions_captured": 553.0,
+          "realized_avoided": 55.3,
+          "planned_avoided": 52.683076589992936,
+          "ppv": 0.4525368248772504
+        },
+        "oracle": {
+          "contacted": 1678,
+          "cost_used": 8573.714285714283,
+          "admissions_captured": 1677.0,
+          "realized_avoided": 167.7,
+          "planned_avoided": 37.02181416042867,
+          "ppv": 0.9994040524433849
+        },
+        "optimized": {
+          "contacted": 1381,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 552.0,
+          "realized_avoided": 55.2,
+          "planned_avoided": 55.207724592860444,
+          "ppv": 0.3997103548153512
+        },
+        "random": {
+          "contacted": 1628.286,
+          "contacted_p2.5_p97.5": [
+            1613.0,
+            1644.0
+          ],
+          "admissions_captured": 306.91,
+          "admissions_captured_p2.5_p97.5": [
+            279.0,
+            337.0
+          ],
+          "realized_avoided": 30.691000000000003,
+          "realized_avoided_p2.5_p97.5": [
+            27.9,
+            33.7
+          ],
+          "planned_avoided": 29.8230672248436,
+          "planned_avoided_p2.5_p97.5": [
+            29.15696757717953,
+            30.488408420226264
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            40.5475,
+            47.2
+          ],
+          "admissions_captured": [
+            405.475,
+            472.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            51.947500000000005,
+            58.752500000000005
+          ],
+          "admissions_captured": [
+            519.475,
+            587.525
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            51.847500000000004,
+            58.6
+          ],
+          "admissions_captured": [
+            518.475,
+            586.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            29.654500000000002,
+            31.8405
+          ],
+          "admissions_captured": [
+            296.54499999999996,
+            318.405
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": -0.09999999999999432,
+            "ci95": [
+              -2.899999999999999,
+              2.7524999999999977
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -1.0,
+            "ci95": [
+              -29.0,
+              27.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 11.700000000000003,
+            "ci95": [
+              7.690000000000003,
+              15.899999999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 117.0,
+            "ci95": [
+              76.9,
+              159.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 11.799999999999997,
+            "ci95": [
+              8.299999999999997,
+              15.404999999999987
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              83.0,
+              154.04999999999995
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 24.608999999999995,
+            "ci95": [
+              21.4385,
+              27.938875000000003
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 246.08999999999997,
+            "ci95": [
+              214.38500000000002,
+              279.38874999999996
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 24.509,
+            "ci95": [
+              21.362500000000008,
+              27.557875
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.08999999999997,
+            "ci95": [
+              213.625,
+              275.57874999999996
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 55.2,
+      "greedy_optimized_planned_avoided": 55.20140531815211,
+      "ilp_minus_greedy_planned_avoided": 0.0063192747083320455,
+      "lp_upper_bound_planned_avoided": 55.209306222070765,
+      "optimized_relative_gap_to_lp_bound": 2.8647873312502e-05
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 8574.0,
+      "effect_scenario": "U20",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1166,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 435.0,
+          "realized_avoided": 87.0,
+          "planned_avoided": 81.34989436853408,
+          "ppv": 0.3730703259005146
+        },
+        "highest_risk": {
+          "contacted": 1222,
+          "cost_used": 8573.142857142859,
+          "admissions_captured": 553.0,
+          "realized_avoided": 110.6,
+          "planned_avoided": 105.36615317998587,
+          "ppv": 0.4525368248772504
+        },
+        "oracle": {
+          "contacted": 1678,
+          "cost_used": 8573.714285714283,
+          "admissions_captured": 1677.0,
+          "realized_avoided": 335.4,
+          "planned_avoided": 74.04362832085734,
+          "ppv": 0.9994040524433849
+        },
+        "optimized": {
+          "contacted": 1381,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 553.0,
+          "realized_avoided": 110.60000000000001,
+          "planned_avoided": 110.41543079656135,
+          "ppv": 0.4004344677769732
+        },
+        "random": {
+          "contacted": 1628.242,
+          "contacted_p2.5_p97.5": [
+            1612.0,
+            1645.0
+          ],
+          "admissions_captured": 307.164,
+          "admissions_captured_p2.5_p97.5": [
+            277.0,
+            335.0
+          ],
+          "realized_avoided": 61.4328,
+          "realized_avoided_p2.5_p97.5": [
+            55.400000000000006,
+            67.0
+          ],
+          "planned_avoided": 59.67637999700487,
+          "planned_avoided_p2.5_p97.5": [
+            58.28979573886168,
+            61.084354087748096
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            81.095,
+            94.4
+          ],
+          "admissions_captured": [
+            405.475,
+            472.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            103.89500000000001,
+            117.50500000000001
+          ],
+          "admissions_captured": [
+            519.475,
+            587.525
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            103.69500000000001,
+            117.2
+          ],
+          "admissions_captured": [
+            518.475,
+            586.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            59.434250000000006,
+            63.800499999999985
+          ],
+          "admissions_captured": [
+            297.17125,
+            319.0025
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 1.4210854715202004e-14,
+            "ci95": [
+              -5.799999999999998,
+              5.5049999999999955
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              -29.0,
+              27.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 23.60000000000001,
+            "ci95": [
+              15.380000000000006,
+              31.799999999999997
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              76.9,
+              159.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 23.599999999999994,
+            "ci95": [
+              16.599999999999994,
+              30.809999999999974
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              83.0,
+              154.04999999999995
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 49.167199999999994,
+            "ci95": [
+              42.61825,
+              56.0215
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.836,
+            "ci95": [
+              213.09125,
+              280.1075
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 49.16720000000001,
+            "ci95": [
+              42.82749999999999,
+              54.825250000000004
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.836,
+            "ci95": [
+              214.1375,
+              274.12624999999997
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 110.4,
+      "greedy_optimized_planned_avoided": 110.40281063630422,
+      "ilp_minus_greedy_planned_avoided": 0.012620160257128532,
+      "lp_upper_bound_planned_avoided": 110.41861244414153,
+      "optimized_relative_gap_to_lp_bound": 2.8814413709347337e-05
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 8574.0,
+      "effect_scenario": "U30",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1166,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 435.0,
+          "realized_avoided": 130.5,
+          "planned_avoided": 122.0248415528011,
+          "ppv": 0.3730703259005146
+        },
+        "highest_risk": {
+          "contacted": 1222,
+          "cost_used": 8573.142857142859,
+          "admissions_captured": 553.0,
+          "realized_avoided": 165.89999999999998,
+          "planned_avoided": 158.04922976997878,
+          "ppv": 0.4525368248772504
+        },
+        "oracle": {
+          "contacted": 1678,
+          "cost_used": 8573.714285714283,
+          "admissions_captured": 1677.0,
+          "realized_avoided": 503.09999999999985,
+          "planned_avoided": 111.065442481286,
+          "ppv": 0.9994040524433849
+        },
+        "optimized": {
+          "contacted": 1381,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 553.0,
+          "realized_avoided": 165.89999999999998,
+          "planned_avoided": 165.62314619484204,
+          "ppv": 0.4004344677769732
+        },
+        "random": {
+          "contacted": 1628.684,
+          "contacted_p2.5_p97.5": [
+            1612.0,
+            1647.0
+          ],
+          "admissions_captured": 307.168,
+          "admissions_captured_p2.5_p97.5": [
+            280.0,
+            335.025
+          ],
+          "realized_avoided": 92.15039999999999,
+          "realized_avoided_p2.5_p97.5": [
+            84.0,
+            100.5075
+          ],
+          "planned_avoided": 89.44201108359286,
+          "planned_avoided_p2.5_p97.5": [
+            87.38516489408302,
+            91.58968323836741
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            121.6425,
+            141.6
+          ],
+          "admissions_captured": [
+            405.475,
+            472.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            155.8425,
+            176.2575
+          ],
+          "admissions_captured": [
+            519.475,
+            587.525
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            155.5425,
+            175.8
+          ],
+          "admissions_captured": [
+            518.475,
+            586.0
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            88.954125,
+            95.82
+          ],
+          "admissions_captured": [
+            296.51375,
+            319.4
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 0.0,
+            "ci95": [
+              -8.699999999999989,
+              8.257500000000007
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 0.0,
+            "ci95": [
+              -29.0,
+              27.524999999999977
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 35.39999999999998,
+            "ci95": [
+              23.069999999999997,
+              47.70000000000001
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              76.9,
+              159.0
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 35.39999999999998,
+            "ci95": [
+              24.900000000000006,
+              46.21499999999999
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              83.0,
+              154.04999999999995
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 73.74959999999999,
+            "ci95": [
+              64.545,
+              83.96287499999998
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.832,
+            "ci95": [
+              215.14999999999998,
+              279.87624999999997
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 73.74959999999999,
+            "ci95": [
+              63.026250000000005,
+              82.934625
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.832,
+            "ci95": [
+              210.08750000000003,
+              276.44874999999996
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 165.6,
+      "greedy_optimized_planned_avoided": 165.60421595445632,
+      "ilp_minus_greedy_planned_avoided": 0.018930240385714114,
+      "lp_upper_bound_planned_avoided": 165.62791866621228,
+      "optimized_relative_gap_to_lp_bound": 2.8814413709218642e-05
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 8574.0,
+      "effect_scenario": "H_dec",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1166,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 435.0,
+          "realized_avoided": 56.699999999999996,
+          "planned_avoided": 52.783595156832575,
+          "ppv": 0.3730703259005146
+        },
+        "highest_risk": {
+          "contacted": 1222,
+          "cost_used": 8573.142857142859,
+          "admissions_captured": 553.0,
+          "realized_avoided": 81.04285714285714,
+          "planned_avoided": 77.75669565165536,
+          "ppv": 0.4525368248772504
+        },
+        "oracle": {
+          "contacted": 1678,
+          "cost_used": 8573.714285714283,
+          "admissions_captured": 1677.0,
+          "realized_avoided": 410.07142857142856,
+          "planned_avoided": 88.20115622876567,
+          "ppv": 0.9994040524433849
+        },
+        "optimized": {
+          "contacted": 1642,
+          "cost_used": 8573.714285714284,
+          "admissions_captured": 504.0,
+          "realized_avoided": 118.05714285714285,
+          "planned_avoided": 116.99665659130204,
+          "ppv": 0.30694275274056027
+        },
+        "random": {
+          "contacted": 1628.637,
+          "contacted_p2.5_p97.5": [
+            1612.0,
+            1646.0
+          ],
+          "admissions_captured": 307.516,
+          "admissions_captured_p2.5_p97.5": [
+            280.0,
+            337.0
+          ],
+          "realized_avoided": 62.59168571428572,
+          "realized_avoided_p2.5_p97.5": [
+            56.39892857142857,
+            68.91571428571429
+          ],
+          "planned_avoided": 61.34697054480583,
+          "planned_avoided_p2.5_p97.5": [
+            59.79581632290081,
+            62.733580639309615
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            52.240357142857135,
+            61.43821428571428
+          ],
+          "admissions_captured": [
+            405.475,
+            472.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            75.21000000000001,
+            86.21107142857142
+          ],
+          "admissions_captured": [
+            519.475,
+            587.525
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            110.05428571428571,
+            126.72178571428572
+          ],
+          "admissions_captured": [
+            470.475,
+            539.525
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            60.097785714285706,
+            65.09644642857143
+          ],
+          "admissions_captured": [
+            296.34,
+            318.56
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 37.014285714285705,
+            "ci95": [
+              28.635357142857142,
+              44.911071428571425
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -49.0,
+            "ci95": [
+              -93.05,
+              -9.475000000000023
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 61.357142857142854,
+            "ci95": [
+              52.46214285714286,
+              71.06785714285714
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 69.0,
+            "ci95": [
+              19.475,
+              118.04999999999995
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 24.34285714285715,
+            "ci95": [
+              18.66250000000001,
+              30.604285714285712
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              83.0,
+              154.04999999999995
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 18.451171428571428,
+            "ci95": [
+              13.192535714285714,
+              23.912749999999996
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.48399999999998,
+            "ci95": [
+              213.94125,
+              279.68375000000003
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 55.46545714285713,
+            "ci95": [
+              47.847678571428574,
+              63.77464285714285
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 196.48399999999998,
+            "ci95": [
+              162.83,
+              232.00124999999997
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 117.92857142857142,
+      "greedy_optimized_planned_avoided": 116.97706011966943,
+      "ilp_minus_greedy_planned_avoided": 0.019596471632610246,
+      "lp_upper_bound_planned_avoided": 116.99996029723906,
+      "optimized_relative_gap_to_lp_bound": 2.8236812462340778e-05
+    },
+    {
+      "cost_scenario": "hours",
+      "capacity_fraction": 0.1,
+      "capacity_slots": 1429,
+      "budget": 8574.0,
+      "effect_scenario": "H_inc",
+      "ilp_status": "Optimal",
+      "point": {
+        "highest_cost": {
+          "contacted": 1166,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 435.0,
+          "realized_avoided": 117.30000000000001,
+          "planned_avoided": 109.91619358023559,
+          "ppv": 0.3730703259005146
+        },
+        "highest_risk": {
+          "contacted": 1222,
+          "cost_used": 8573.142857142859,
+          "admissions_captured": 553.0,
+          "realized_avoided": 140.15714285714284,
+          "planned_avoided": 132.97561070831637,
+          "ppv": 0.4525368248772504
+        },
+        "oracle": {
+          "contacted": 1218,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 1218.0,
+          "realized_avoided": 306.88571428571424,
+          "planned_avoided": 107.79524894062519,
+          "ppv": 1.0
+        },
+        "optimized": {
+          "contacted": 1180,
+          "cost_used": 8573.714285714286,
+          "admissions_captured": 538.0,
+          "realized_avoided": 141.82857142857142,
+          "planned_avoided": 133.77913677222614,
+          "ppv": 0.4559322033898305
+        },
+        "random": {
+          "contacted": 1628.473,
+          "contacted_p2.5_p97.5": [
+            1612.0,
+            1645.0
+          ],
+          "admissions_captured": 307.852,
+          "admissions_captured_p2.5_p97.5": [
+            280.0,
+            336.0
+          ],
+          "realized_avoided": 60.49091428571429,
+          "realized_avoided_p2.5_p97.5": [
+            54.91178571428571,
+            65.84428571428572
+          ],
+          "planned_avoided": 57.91811725932388,
+          "planned_avoided_p2.5_p97.5": [
+            55.98982803464988,
+            59.86452346070467
+          ]
+        }
+      },
+      "bootstrap_ci95": {
+        "highest_cost": {
+          "realized_avoided": [
+            109.28500000000001,
+            127.17892857142859
+          ],
+          "admissions_captured": [
+            405.475,
+            472.0
+          ]
+        },
+        "highest_risk": {
+          "realized_avoided": [
+            131.455,
+            148.5425
+          ],
+          "admissions_captured": [
+            519.475,
+            587.525
+          ]
+        },
+        "optimized": {
+          "realized_avoided": [
+            133.62857142857143,
+            150.5082142857143
+          ],
+          "admissions_captured": [
+            507.0,
+            569.525
+          ]
+        },
+        "random": {
+          "realized_avoided": [
+            57.79933928571429,
+            62.46907142857143
+          ],
+          "admissions_captured": [
+            294.95875,
+            319.51
+          ]
+        }
+      },
+      "paired_differences": {
+        "optimized-highest_risk": {
+          "realized_avoided": {
+            "estimate": 1.671428571428578,
+            "ci95": [
+              -1.6914285714285695,
+              5.251071428571413
+            ]
+          },
+          "admissions_captured": {
+            "estimate": -15.0,
+            "ci95": [
+              -30.0,
+              1.0
+            ]
+          }
+        },
+        "optimized-highest_cost": {
+          "realized_avoided": {
+            "estimate": 24.52857142857141,
+            "ci95": [
+              15.584999999999976,
+              31.958214285714288
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 103.0,
+            "ci95": [
+              70.475,
+              133.04999999999995
+            ]
+          }
+        },
+        "highest_risk-highest_cost": {
+          "realized_avoided": {
+            "estimate": 22.857142857142833,
+            "ci95": [
+              14.202500000000013,
+              30.758571428571408
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 118.0,
+            "ci95": [
+              83.0,
+              154.04999999999995
+            ]
+          }
+        },
+        "highest_risk-random": {
+          "realized_avoided": {
+            "estimate": 79.66622857142855,
+            "ci95": [
+              71.46062500000001,
+              87.58001785714285
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 245.14800000000002,
+            "ci95": [
+              210.61125,
+              281.27124999999995
+            ]
+          }
+        },
+        "optimized-random": {
+          "realized_avoided": {
+            "estimate": 81.33765714285713,
+            "ci95": [
+              73.31128571428573,
+              89.56975000000003
+            ]
+          },
+          "admissions_captured": {
+            "estimate": 230.14800000000002,
+            "ci95": [
+              199.2175,
+              262.16624999999993
+            ]
+          }
+        }
+      },
+      "greedy_optimized_realized_avoided": 141.82857142857142,
+      "greedy_optimized_planned_avoided": 133.77913677222614,
+      "ilp_minus_greedy_planned_avoided": 0.0,
+      "lp_upper_bound_planned_avoided": 133.7828772043165,
+      "optimized_relative_gap_to_lp_bound": 2.7958974784500052e-05
+    }
+  ],
+  "fairness": {
+    "overall": {
+      "capture_rate": 0.1279673590504451,
+      "capture_rate_ci95": [
+        0.11723337544970786,
+        0.13965285520799114
+      ],
+      "selection_rate": 0.049972004479283315,
+      "admission_rate": 0.18868980963045912
+    },
+    "groups": {
+      "age_group=65-74": {
+        "n": 5969,
+        "events": 1017,
+        "admission_rate": 0.1703802982074049,
+        "mean_predicted": 0.16631602897562153,
+        "calibration_in_the_large": -0.0040642692317833795,
+        "auroc": 0.7363275448236204,
+        "auroc_ci95": [
+          0.7210809106387215,
+          0.7505099349115634
+        ],
+        "selection_rate": 0.029318143742670465,
+        "capture_rate": 0.06588003933136677,
+        "capture_rate_ci95": [
+          0.05079719387755102,
+          0.08151176212481175
+        ],
+        "flag_capture_gap_gt_5pp": true
+      },
+      "age_group=75-84": {
+        "n": 4306,
+        "events": 892,
+        "admission_rate": 0.20715281003251276,
+        "mean_predicted": 0.19011592671400154,
+        "calibration_in_the_large": -0.01703688331851122,
+        "auroc": 0.7407481656907328,
+        "auroc_ci95": [
+          0.7243930062436467,
+          0.7579003859892905
+        ],
+        "selection_rate": 0.05294937296795169,
+        "capture_rate": 0.13452914798206278,
+        "capture_rate_ci95": [
+          0.11212242303151394,
+          0.15599674140500525
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "age_group=85+": {
+        "n": 1842,
+        "events": 372,
+        "admission_rate": 0.20195439739413681,
+        "mean_predicted": 0.21395949027631495,
+        "calibration_in_the_large": 0.012005092882178131,
+        "auroc": 0.7315905932265379,
+        "auroc_ci95": [
+          0.705633380415593,
+          0.7576976402566836
+        ],
+        "selection_rate": 0.09337676438653637,
+        "capture_rate": 0.22043010752688172,
+        "capture_rate_ci95": [
+          0.18338337950138503,
+          0.2646003111572085
+        ],
+        "flag_capture_gap_gt_5pp": true
+      },
+      "age_group=<65": {
+        "n": 2171,
+        "events": 415,
+        "admission_rate": 0.1911561492399816,
+        "mean_predicted": 0.18917535843665625,
+        "calibration_in_the_large": -0.001980790803325333,
+        "auroc": 0.7601716661635152,
+        "auroc_ci95": [
+          0.7352176220101924,
+          0.782624738665833
+        ],
+        "selection_rate": 0.06402579456471671,
+        "capture_rate": 0.18313253012048192,
+        "capture_rate_ci95": [
+          0.1430108276869935,
+          0.2240328237410071
+        ],
+        "flag_capture_gap_gt_5pp": true
+      },
+      "sex=female": {
+        "n": 7960,
+        "events": 1488,
+        "admission_rate": 0.18693467336683417,
+        "mean_predicted": 0.18763514687862806,
+        "calibration_in_the_large": 0.0007004735117938921,
+        "auroc": 0.7491158148583809,
+        "auroc_ci95": [
+          0.7361803136489073,
+          0.7619947605925528
+        ],
+        "selection_rate": 0.055904522613065326,
+        "capture_rate": 0.14650537634408603,
+        "capture_rate_ci95": [
+          0.1321062602471308,
+          0.16203316914527485
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "sex=male": {
+        "n": 6328,
+        "events": 1208,
+        "admission_rate": 0.19089759797724398,
+        "mean_predicted": 0.1774046890782316,
+        "calibration_in_the_large": -0.01349290889901239,
+        "auroc": 0.732943867058154,
+        "auroc_ci95": [
+          0.7182206943557478,
+          0.7454557926333453
+        ],
+        "selection_rate": 0.042509481668773705,
+        "capture_rate": 0.10513245033112582,
+        "capture_rate_ci95": [
+          0.08835195214582343,
+          0.1234824589636305
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "race=black": {
+        "n": 1400,
+        "events": 290,
+        "admission_rate": 0.20714285714285716,
+        "mean_predicted": 0.18150120143546852,
+        "calibration_in_the_large": -0.025641655707388633,
+        "auroc": 0.7431531531531532,
+        "auroc_ci95": [
+          0.7158249991086446,
+          0.7701417712897605
+        ],
+        "selection_rate": 0.06142857142857143,
+        "capture_rate": 0.1482758620689655,
+        "capture_rate_ci95": [
+          0.10793887147335424,
+          0.18405340859748154
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "race=hispanic": {
+        "n": 302,
+        "events": 45,
+        "admission_rate": 0.1490066225165563,
+        "mean_predicted": 0.1577052321349487,
+        "calibration_in_the_large": 0.008698609618392389,
+        "auroc": 0.7388672719412019,
+        "auroc_ci95": [
+          0.6713869308140088,
+          0.7995759372926343
+        ],
+        "selection_rate": 0.029801324503311258,
+        "capture_rate": 0.06666666666666667,
+        "capture_rate_ci95": [
+          0.0,
+          0.14127906976744178
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "race=other": {
+        "n": 586,
+        "events": 95,
+        "admission_rate": 0.1621160409556314,
+        "mean_predicted": 0.15989612695677177,
+        "calibration_in_the_large": -0.002219913998859624,
+        "auroc": 0.7718619358988101,
+        "auroc_ci95": [
+          0.7197134908902021,
+          0.8200876905535704
+        ],
+        "selection_rate": 0.04607508532423208,
+        "capture_rate": 0.17894736842105263,
+        "capture_rate_ci95": [
+          0.10579507278835386,
+          0.2620261211280629
+        ],
+        "flag_capture_gap_gt_5pp": false
+      },
+      "race=white": {
+        "n": 12000,
+        "events": 2266,
+        "admission_rate": 0.18883333333333333,
+        "mean_predicted": 0.1850637374274875,
+        "calibration_in_the_large": -0.0037695959058458295,
+        "auroc": 0.7393528629415352,
+        "auroc_ci95": [
+          0.7291965047736049,
+          0.7493217385345616
+        ],
+        "selection_rate": 0.04933333333333333,
+        "capture_rate": 0.12444836716681378,
+        "capture_rate_ci95": [
+          0.1136883921357393,
+          0.13628185060723969
+        ],
+        "flag_capture_gap_gt_5pp": false
+      }
+    },
+    "policy": {
+      "capacity": 0.05,
+      "effect": "U20",
+      "cost": "uniform"
+    }
+  },
+  "sensitivity_exclude_parta0_2009": {
+    "excluded": 3,
+    "n": 14285,
+    "auroc": 0.7412769815488083,
+    "policy": {
+      "highest_cost": {
+        "contacted": 714,
+        "cost_used": 714.0,
+        "admissions_captured": 277.0,
+        "realized_avoided": 55.400000000000006,
+        "planned_avoided": 50.99747776118544,
+        "ppv": 0.38795518207282914
+      },
+      "highest_risk": {
+        "contacted": 714,
+        "cost_used": 714.0,
+        "admissions_captured": 345.0,
+        "realized_avoided": 69.0,
+        "planned_avoided": 66.27619046945682,
+        "ppv": 0.4831932773109244
+      },
+      "oracle": {
+        "contacted": 714,
+        "cost_used": 714.0,
+        "admissions_captured": 714.0,
+        "realized_avoided": 142.79999999999998,
+        "planned_avoided": 59.74370557274182,
+        "ppv": 1.0
+      },
+      "optimized": {
+        "contacted": 714,
+        "cost_used": 714.0,
+        "admissions_captured": 345.0,
+        "realized_avoided": 69.0,
+        "planned_avoided": 66.27619046945682,
+        "ppv": 0.4831932773109244
+      }
+    }
+  },
+  "pilot": [
+    {
+      "capacity_fraction": 0.02,
+      "control_admission_rate": 0.5314685314685315,
+      "assumed_rrr": 0.1,
+      "treated_admission_rate": 0.4783216783216783,
+      "n_per_arm_individual": 1389,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 2070,
+          "clusters_per_arm": 42
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 4793,
+          "clusters_per_arm": 96
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.02,
+      "control_admission_rate": 0.5314685314685315,
+      "assumed_rrr": 0.2,
+      "treated_admission_rate": 0.4251748251748252,
+      "n_per_arm_individual": 346,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 516,
+          "clusters_per_arm": 11
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 1194,
+          "clusters_per_arm": 24
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.02,
+      "control_admission_rate": 0.5314685314685315,
+      "assumed_rrr": 0.3,
+      "treated_admission_rate": 0.372027972027972,
+      "n_per_arm_individual": 152,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 227,
+          "clusters_per_arm": 5
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 525,
+          "clusters_per_arm": 11
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.05,
+      "control_admission_rate": 0.4831932773109244,
+      "assumed_rrr": 0.1,
+      "treated_admission_rate": 0.43487394957983194,
+      "n_per_arm_individual": 1669,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 2487,
+          "clusters_per_arm": 50
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 5759,
+          "clusters_per_arm": 116
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.05,
+      "control_admission_rate": 0.4831932773109244,
+      "assumed_rrr": 0.2,
+      "treated_admission_rate": 0.3865546218487395,
+      "n_per_arm_individual": 412,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 614,
+          "clusters_per_arm": 13
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 1422,
+          "clusters_per_arm": 29
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.05,
+      "control_admission_rate": 0.4831932773109244,
+      "assumed_rrr": 0.3,
+      "treated_admission_rate": 0.338235294117647,
+      "n_per_arm_individual": 180,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 269,
+          "clusters_per_arm": 6
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 621,
+          "clusters_per_arm": 13
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.1,
+      "control_admission_rate": 0.43876836948915326,
+      "assumed_rrr": 0.1,
+      "treated_admission_rate": 0.39489153254023796,
+      "n_per_arm_individual": 1981,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 2952,
+          "clusters_per_arm": 60
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 6835,
+          "clusters_per_arm": 137
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.1,
+      "control_admission_rate": 0.43876836948915326,
+      "assumed_rrr": 0.2,
+      "treated_admission_rate": 0.35101469559132265,
+      "n_per_arm_individual": 486,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 725,
+          "clusters_per_arm": 15
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 1677,
+          "clusters_per_arm": 34
+        }
+      }
+    },
+    {
+      "capacity_fraction": 0.1,
+      "control_admission_rate": 0.43876836948915326,
+      "assumed_rrr": 0.3,
+      "treated_admission_rate": 0.3071378586424073,
+      "n_per_arm_individual": 211,
+      "cluster_design": {
+        "icc_0.01": {
+          "design_effect": 1.49,
+          "n_per_arm": 315,
+          "clusters_per_arm": 7
+        },
+        "icc_0.05": {
+          "design_effect": 3.45,
+          "n_per_arm": 728,
+          "clusters_per_arm": 15
+        }
+      }
+    }
+  ],
+  "compute": {
+    "seconds": 705.8536384105682,
+    "peak_rss_mb": 528.09375
+  }
+}
