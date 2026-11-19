@@ -22,6 +22,10 @@ OUT = Path(sys.argv[2]) if len(sys.argv) > 2 else ROOT / "reports"
 FIG = OUT / "figures"
 DEV = json.loads((ROOT / "results" / "dev_results.json").read_text())
 TEST = json.loads(RES_PATH.read_text())
+_CAUSAL, _FORECAST = ROOT / "results" / "causal_results.json", ROOT / "results" / "forecast_results.json"
+CAUSAL = json.loads(_CAUSAL.read_text()) if _CAUSAL.exists() and OUT == ROOT / "reports" else None
+FORECAST = json.loads(_FORECAST.read_text()) if _FORECAST.exists() and OUT == ROOT / "reports" else None
+EST_LABEL = {"naive": "Naive (enrolled vs not)", "gcomp": "Outcome regression", "ipw": "IPW", "aipw": "AIPW (doubly robust)"}
 
 # reference palette (dataviz skill, light mode), categorical slots in fixed order
 BLUE, ORANGE, AQUA, YELLOW, VIOLET = "#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#6250d6"
@@ -253,6 +257,93 @@ def tables():
     return "\n".join(L) + "\n"
 
 
+def scen_label(sc):
+    hid = " + unmeasured" if sc["hidden"] else ""
+    return f"confounding {sc['gamma']:g}, RRR {int(sc['rrr']*100)}%{hid}"
+
+
+def fig_causal():
+    sc = CAUSAL["scenarios"]
+    fig, ax = plt.subplots(figsize=(9, 5.6))
+    ys = range(len(sc))
+    for j, (k, c) in enumerate([("naive", ORANGE), ("gcomp", VIOLET), ("ipw", AQUA), ("aipw", BLUE)]):
+        b = [x["across_replicates"]["estimators"][k]["mean_bias"] * 100 for x in sc]
+        ax.scatter(b, [y + (j - 1.5) * 0.17 for y in ys], color=c, s=28, label=EST_LABEL[k], zorder=3)
+    ax.axvline(0, color=INK2, lw=1)
+    ax.axvspan(-0.5, 0.5, color=GRID, alpha=0.6, label="|bias| < 0.5 pp (prespecified)")
+    ax.set_yticks(list(ys), [scen_label(x) for x in sc], fontsize=7.5)
+    ax.invert_yaxis()
+    ax.set_xlabel("Mean bias vs simulated truth (percentage points of admission risk), 100 replicates")
+    ax.set_title("Simulated program: naive comparison is confounded;\nadjustment removes measured confounding only", fontsize=10.5)
+    ax.legend(frameon=False, fontsize=7.5, loc="lower right")
+    ax.grid(axis="y", visible=False)
+    fig.tight_layout()
+    fig.savefig(FIG / "causal_bias.png")
+    plt.close(fig)
+
+
+def fig_forecast():
+    full = FORECAST["full_series"]
+    months = sorted(int(k) for k in full)
+    lab = [f"{m // 100}-{m % 100:02d}" for m in months]
+    vals = [full[str(m)]["admissions"] for m in months]
+    lo_w, hi_w = FORECAST["window"]
+    fig, ax = plt.subplots(figsize=(10, 4.4))
+    x = list(range(len(months)))
+    ax.plot(x, vals, color=INK2, lw=2, marker="o", ms=3, label="Monthly admissions (all Sample 1 members)")
+    for i, m in enumerate(months):
+        if not (lo_w <= m <= hi_w):
+            ax.axvspan(i - 0.5, i + 0.5, color=GRID, alpha=0.9, lw=0)
+    bt = [r for r in FORECAST["series"]["admissions"]["backtest"] if r["h"] == 1]
+    pos = {m: i for i, m in enumerate(months)}
+    for meth, c, off in [("naive", ORANGE, -0.18), ("ets_damped", BLUE, 0.18)]:
+        rr = [r for r in bt if r["method"] == meth]
+        xs = [pos[r["target_month"]] + off for r in rr]
+        ax.errorbar(xs, [r["point"] for r in rr], yerr=[[r["point"] - r["lo80"] for r in rr], [r["hi80"] - r["point"] for r in rr]],
+                    fmt="o", ms=5, color=c, ecolor=c, capsize=2, label=("Naive" if meth == "naive" else "Damped ETS") + " 1-month forecast, 80% PI",
+                    alpha=0.9)
+    ax.set_xticks(x[::3], lab[::3], fontsize=8, rotation=0)
+    ax.set_ylabel("Inpatient admissions per month")
+    ax.set_title("Monthly admissions: grey months are excluded artefacts (start-of-data ramp, 2010 attrition)", fontsize=10.5)
+    ax.legend(frameon=False, fontsize=8, loc="lower left")
+    ax.grid(axis="x", visible=False)
+    fig.tight_layout()
+    fig.savefig(FIG / "forecast.png")
+    plt.close(fig)
+
+
+def extension_tables():
+    L = []
+    if CAUSAL:
+        L.append(f"## Addendum A: semi-synthetic program effect (SIMULATED enrollment and effect; n={CAUSAL['n']:,} test members, 20% enrolled)\n")
+        L.append("Replicate 1 estimates with 200-resample bootstrap 95% CIs; bias and coverage over 100 replicates. ATE = risk difference (percentage points).\n")
+        L.append("| Scenario | True ATE (rep 1) | Naive [95% CI] | IPW [95% CI] | AIPW [95% CI] | Mean bias: naive / g-comp / IPW / AIPW | AIPW Wald coverage | Max abs SMD before → after IPW |")
+        L.append("|---|---|---|---|---|---|---|---|")
+        pp = lambda v: f"{v*100:.2f}"
+        for x in CAUSAL["scenarios"]:
+            r1, ac = x["replicate1"], x["across_replicates"]["estimators"]
+            e = lambda k: f"{pp(r1['estimates'][k]['estimate'])} [{pp(r1['estimates'][k]['bootstrap_ci95'][0])}, {pp(r1['estimates'][k]['bootstrap_ci95'][1])}]"
+            b = r1["balance"]
+            L.append(f"| {scen_label(x)} | {pp(r1['true_ate'])} | {e('naive')} | {e('ipw')} | {e('aipw')} | "
+                     f"{' / '.join(pp(ac[k]['mean_bias']) for k in ['naive', 'gcomp', 'ipw', 'aipw'])} | {ac['aipw']['wald_coverage95']:.2f} | "
+                     f"{b['max_abs_smd_before']:.2f} → {b['max_abs_smd_after_ipw']:.2f} |")
+        L.append("")
+    if FORECAST:
+        L.append(f"## Addendum B: monthly admission forecasting (window {FORECAST['window'][0]}–{FORECAST['window'][1]}, {FORECAST['n_months_window']} months; rolling origin)\n")
+        for name in ["admissions", "payments"]:
+            L.append(f"**{name}**\n")
+            L.append("| Method | h | n | MAE | MAPE | MASE | 80% PI coverage [exact 95% CI] | 95% PI coverage [exact 95% CI] |")
+            L.append("|---|---|---|---|---|---|---|---|")
+            for k, d in FORECAST["series"][name]["summary"].items():
+                m, h = k.split("|h=")
+                fmt = (lambda v: f"{v:,.0f}") if name == "admissions" else (lambda v: f"${v/1e6:,.2f}M")
+                L.append(f"| {m} | {h} | {d['n_forecasts']} | {fmt(d['mae'])} | {d['mape_pct']:.1f}% | {d['mase']:.2f} | "
+                         f"{d['coverage80']:.2f} [{d['coverage80_exact_ci95'][0]:.2f}, {d['coverage80_exact_ci95'][1]:.2f}] | "
+                         f"{d['coverage95']:.2f} [{d['coverage95_exact_ci95'][0]:.2f}, {d['coverage95_exact_ci95'][1]:.2f}] |")
+            L.append("")
+    return "\n".join(L)
+
+
 def summary_html(tables_md):
     def img(name):
         return "data:image/png;base64," + base64.b64encode((FIG / name).read_bytes()).decode()
@@ -267,6 +358,15 @@ def summary_html(tables_md):
     ]
     tile_html = "".join(f'<div class="tile"><div class="num">{html.escape(a)}</div><div class="lab">{html.escape(b)}</div></div>' for a, b in tiles)
     md_tables = html.escape(tables_md)
+    extra_html = ""
+    if CAUSAL:
+        extra_html += (f'<h2>7. Measuring a program effect (simulated)</h2><p class="sub">The program and its true effect are simulated so the right answer is known. '
+                       f'Sicker members were made more likely to enroll. A naive enrolled-vs-not comparison is biased; propensity-score methods recover the effect only when the confounders are measured.</p>'
+                       f'<img src="{img("causal_bias.png")}" alt="Bias of naive, IPW and AIPW estimators by scenario">')
+    if FORECAST:
+        extra_html += (f'<h2>8. Forecasting monthly admissions</h2><p class="sub">Only {FORECAST["n_months_window"]} usable months: too short for seasonal models. '
+                       f'Simple methods were compared in a rolling backtest; interval coverage is reported with its uncertainty.</p>'
+                       f'<img src="{img("forecast.png")}" alt="Monthly admissions with backtest forecasts">')
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Care Targeting Prototype</title>
@@ -296,6 +396,7 @@ details summary {{ cursor:pointer; color:var(--ink2); }}
 <h2>4. Are the risk numbers honest? (calibration)</h2><img src="{img('calibration.png')}" alt="Reliability curves">
 <h2>5. Subgroup check</h2><img src="{img('subgroups.png')}" alt="Capture rate by subgroup">
 <h2>6. What drives the risk score</h2><img src="{img('shap.png')}" alt="Top SHAP features">
+{extra_html}
 <details><summary>All result tables (generated from results/*.json)</summary><pre>{md_tables}</pre></details>
 <p class="sub">Generated by scripts/make_figures.py from results/dev_results.json and results/test_results.json. Not a clinical tool.</p>
 </main></body></html>
@@ -310,7 +411,11 @@ def main():
     fig_sensitivity()
     fig_subgroups()
     fig_shap()
-    t = tables()
+    if CAUSAL:
+        fig_causal()
+    if FORECAST:
+        fig_forecast()
+    t = tables() + "\n" + extension_tables()
     tables_path = ROOT / "results" / "tables.md" if OUT == ROOT / "reports" else OUT / "tables.md"
     tables_path.write_text(f"# Result tables (generated from {RES_PATH.name} and dev_results.json)\n\n" + t)
     (OUT / "summary.html").write_text(summary_html(t))

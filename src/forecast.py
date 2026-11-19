@@ -49,8 +49,9 @@ def forecast(train, h, method, seed=2026):
         sd = _sd(np.diff(y) - slope) * np.sqrt(hs)
     elif method == "ets_damped":
         from statsmodels.tsa.exponential_smoothing.ets import ETSModel
-        res = ETSModel(y, error="add", trend="add", damped_trend=True).fit(disp=False, maxiter=2000)
-        pred = res.get_prediction(start=n, end=n + h - 1, method="simulated", simulate_repetitions=1000, random_state=seed)
+        ys = pd.Series(y, index=pd.period_range("2000-01", periods=n, freq="M"))  # dummy monthly index (statsmodels needs one)
+        res = ETSModel(ys, error="add", trend="add", damped_trend=True).fit(disp=False, maxiter=2000)
+        pred = res.get_prediction(start=n, end=n + h - 1, method="simulated", simulate_repetitions=1000, rng=np.random.default_rng(seed))
         out = {"point": np.asarray(pred.predicted_mean, float)}
         for level in (0.8, 0.95):
             sf = pred.summary_frame(alpha=1 - level)

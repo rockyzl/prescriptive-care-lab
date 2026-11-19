@@ -95,3 +95,10 @@ def test_coverage_summary():
                        "lo80": [0.0, 0, 0, 5], "hi80": [9.0, 9, 9, 9], "lo95": [0.0] * 4, "hi95": [9.0] * 4})
     s = summarize(bt, 1.0)["m|h=1"]
     assert s["coverage80"] == 0.75 and s["coverage95"] == 1.0 and s["mae"] == 0
+
+
+def test_ets_forecast_runs_and_intervals_nest():
+    y = 2000 + 10 * np.sin(np.arange(15)) + np.arange(15)
+    f = forecast(y, 3, "ets_damped")
+    assert len(f["point"]) == 3
+    assert (f[0.95][0] <= f[0.8][0]).all() and (f[0.8][1] <= f[0.95][1]).all()
