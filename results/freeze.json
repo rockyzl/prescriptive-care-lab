@@ -1,0 +1,32 @@
+{
+  "commit": "1e34e9ef9930ae13ad0d574312ee03562db1f6a0",
+  "frozen_at": "2026-11-19T13:56:06.287956+00:00",
+  "sha256": {
+    "protocol.json": "4aa696a407b43c77d15e74ad15f88d1ed88c854414fcc7bf23ff66df30c12143",
+    "pyproject.toml": "67f86b8892bb35f5ae20c6a055084d8ce46295a7aca72908a678ae6032cb9612",
+    "uv.lock": "08671450ab7e65ed9ed7da68ed5ee39c4c4ffac236ff1f375d65e622bfd71a89",
+    "src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/data.py": "d3e18f3ecb074824e314ea41ff7cec7de80b56136f4d67228370b1a937b2d22d",
+    "src/features.py": "0fcb69c217471d26c89251200e7afd2478b21228c132c4eda0ad9aa9d5d7cc86",
+    "src/models.py": "c2edd37325190c5922aaea56010fc1d0e839296757edcc0581dacf50ca0baec8",
+    "src/cluster.py": "17789925ce39883e30b18a47e13d2471a962d81526cddf9e54e926d7d8d36d44",
+    "src/prescriptive.py": "4a55798a468fce9e8e7112ffc52d2b1c618f66dd23c0fafaa6819c5eb30ff3a9",
+    "src/run.py": "5e6cc0d7ad632001e05d761e24feca476b0084a64136b49bcf96d30d1e255cb4",
+    "data/manifest.json": "43e7cb201df06358903ef72077ce432d6fd6490406a7e4d816857f37ef782a25",
+    "data/membership.json": "68f71a8b21d93f58f2e2e5fdb3d355a500ea7e33eaaa977991a4a17974b56aed",
+    "results/dev_results.json": "283f8bb32a70c9f50ed7839ea0cd48637c4955d8f7fd75420c41973abbe2ac88",
+    "models/preprocessor.json": "9be2abdb19e004dc8e7899e8c82eb5aa001adec9813c15a60d6c910d70294e9e",
+    "models/logistic.json": "0a41d67b45583cf342bb6b1ed53f6bf31d59e4bc11472d716156b33b49759663",
+    "models/lgbm_y_ip.txt": "046188f53d28fc81452767691ef4ea575d3a148eee6465f8114770e31fe2ae29",
+    "models/lgbm_high_cost.txt": "afffcc861f547cc6aa686ea8bbca98d7a1588c74a1e6fd441f8a9eeccefa395d",
+    "models/phenotypes.json": "a0f84d9e6c1b31482555a66fb18b4a5d9e6fe0ee1946f34f8040ada15783d3b2",
+    "models/dev_meta.json": "3ba436bcae869909d30508c29e31e8c947d5b7ef75b6d8a51f299432fdd8dd1c"
+  },
+  "derived_sha256": {
+    "features.parquet": "1e17c04a548a04065469810a242efcc45eba652611da342ddaa3d346dad7334c",
+    "audit.parquet": "38376b4e4464e7ec2a6f5a5a62be7b4b17fb5d7b97714f92f16773048ff1c1c6",
+    "labels_train.parquet": "be2845ba10a3336bda92618c2a2d8da409a0317223dccddfa318e2a31a0a252c",
+    "labels_val.parquet": "edd16041f31c08c9b551293f0da0cea888a5ad55c53892fb3a7f7a3546fddbcf",
+    "labels_test.parquet": "1ab418251485f12e9d97119c49cf0931b9d1d2f9d1a26fae0b24e12e2d2fe0c1"
+  }
+}
