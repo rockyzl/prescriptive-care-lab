@@ -225,3 +225,96 @@ All of the following were made before any model output was seen, unless stated o
    - `dev` logic, models and phenotypes are unchanged.
    - Every result now also records the optimized policy's relative gap to the LP bound.
 7. **Phenotype names.** Plain-language phenotype names in `scripts/make_figures.py` were written from the train profiles before the test run.
+
+---
+
+# Addendum A (v1.1): program-effect estimation and demand forecasting
+
+This addendum was written and committed **after** the one-shot test (9c15e92) and **before** any code for these two modules existed or was run. It adds two analyses requested for a second application (forecasting; causal/program-effectiveness analysis). It changes nothing in sections 1–10, and their results stand as frozen.
+
+Before writing it, one descriptive look was taken at the monthly inpatient-admission counts for the whole Sample 1 population. No model was fit. That look showed:
+- **January–February 2008 ramp-up:** 1,533 and 1,805 admissions, against roughly 2,300–2,600 from March 2008 on.
+- **2010 collapse:** from 1,786 in January 2010 to 257 in December 2010. CMS documents lower 2010 claim counts "due to attrition from death, and some effects of disclosure treatment".
+- **Steady decline through 2009**, consistent with a closed 2008 cohort that ages and dies with no new entrants.
+
+These observations shaped section B.1 and are reported as findings, not hidden.
+
+## A. Semi-synthetic program-effect (causal) estimation
+
+**Purpose.** Show, against a *known* simulated truth, that a naive enrolled-vs-not comparison is confounded, and test whether propensity-score methods recover the effect. **The program and its effect are simulated.** Nothing here estimates a real care-management effect.
+
+### A.1 Population and covariates
+
+- **Population:** the 14,288 test-split members.
+  - Their predictive evaluation is already complete and frozen, so re-using their 2009 outcomes here cannot affect it.
+- **Covariates X:** the 54 frozen predictors, transformed with the frozen train-fit preprocessor (log1p, then standardization).
+- **Untreated potential outcome:** Y0 = each member's **observed** 2009 any-admission.
+
+### A.2 Data-generating process (simulated)
+
+- **Risk index:** s = standardized logit of the frozen LightGBM 2009-admission risk. It is a non-linear function of X.
+- **Enrollment:** T ~ Bernoulli(sigmoid(α + γ·s)).
+  - α is solved numerically per scenario so that mean enrollment probability = 20%.
+  - γ is the confounding strength: higher-risk members enroll more.
+- **Effect:**
+  - D ~ Bernoulli(RRR), drawn independently;
+  - Y1 = Y0·(1 − D), so enrollment removes each would-be admission with probability RRR;
+  - observed Y = T·Y1 + (1 − T)·Y0.
+- **Estimand:** the sample average treatment effect on the risk-difference scale, ATE = mean(Y1 − Y0). It is computed exactly from the simulated potential outcomes in each replicate.
+- **Grid:**
+  - γ ∈ {0 (randomized), 0.5, 1, 2} × RRR ∈ {0, 0.15, 0.30}, giving 12 scenarios.
+  - Plus an **unmeasured-confounding** stress test at γ = 1, RRR ∈ {0, 0.15}. Here enrollment uses s' = (s + u)/√2, where u = standardized(Y0 + N(0, 1)) is a hidden severity signal. u is correlated with the outcome and is **not** in X.
+
+### A.3 Estimators (adjustment set = X only)
+
+1. **Naive:** mean(Y | T=1) − mean(Y | T=0).
+2. **Outcome regression (g-computation):** L2 logistic regression (C = 1) of Y on X, fit separately in each arm, then averaged over all members.
+3. **IPW (Hájek, normalized weights):** propensity from L2 logistic regression (C = 1) on X, clipped to [0.01, 0.99].
+4. **AIPW (doubly robust):** the propensity model and arm-specific outcome models above.
+
+There is no cross-fitting: the models are low-dimensional (54 covariates, about 14k rows). This choice is stated as a limitation.
+
+### A.4 Diagnostics and uncertainty
+
+- **Balance:** absolute standardized mean differences (SMD) for each covariate, before and after IPW weighting.
+  - Reported: the maximum |SMD| and the count of covariates with |SMD| > 0.1.
+  - Also reported: propensity range and the Kish effective sample size of each arm.
+- **Bootstrap CIs:** replicate 1 of each scenario gets 200 member-bootstrap resamples. All models are refit in each resample, with percentile 95% CIs, for all four estimators.
+- **Repeated simulation:** 100 replicates per scenario, re-drawing T and D. Reported per estimator:
+  - mean bias against the true ATE, and RMSE;
+  - for IPW and AIPW, coverage of influence-function Wald 95% CIs. These ignore propensity-estimation error, which is usually conservative for IPW.
+- **Prespecified reading:**
+  - An estimator "recovers" the effect in a scenario if |mean bias| < 0.005 (half a percentage point) **and**, for IPW and AIPW, coverage is ≥ 0.90.
+  - The unmeasured-confounding scenarios are expected to fail. Their purpose is to show that the methods cannot fix a confounder that was not measured.
+
+## B. Monthly admission forecasting
+
+### B.1 Series and window
+
+- **Series:** monthly count of distinct inpatient claims (deduplicated on `CLM_ID`) by admission month, for **all** Sample 1 beneficiaries. The secondary series is monthly inpatient payments (`CLM_PMT_AMT`).
+- **Modeling window: March 2008 – December 2009 (22 months).**
+  - **January–February 2008 is excluded.** The ramp-up is left truncation at the start of the data window.
+  - **2010 is excluded.** It shows the CMS-documented attrition/disclosure decline.
+  - Both exclusions are shown in a figure and reported.
+- **Consequence:** with 22 usable months there is less than two full seasonal cycles. **SARIMA and seasonal ETS are not identifiable and are not fit.** That is a finding about the data, not a modeling choice.
+
+### B.2 Methods
+
+1. **Naive:** last value.
+2. **Seasonal naive:** same month one year earlier.
+3. **Drift:** random walk with drift estimated on the training window.
+4. **Damped additive-trend ETS** (statsmodels `ETSModel`, error="add", trend="add", damped_trend=True).
+
+### B.3 Rolling-origin backtest
+
+- **Origins:** first training window March 2008 – February 2009 (12 months), expanding by one month per origin. Forecasts at horizons h = 1 and h = 3, with targets up to December 2009. This gives 10 one-step and 8 three-step forecasts.
+- **Accuracy metrics:** MAE, MAPE, and MASE (scaled by the in-sample one-step naive MAE of the first training window).
+- **Prediction intervals:** 80% and 95%.
+  - Naive, seasonal naive and drift use Gaussian intervals. The SD comes from the training-window one-step residuals of that method, scaled by √h.
+  - Seasonal naive has no training residuals until month 13, so its residual SD is borrowed from naive.
+  - ETS uses statsmodels' simulation-based intervals (1,000 paths, seed 2026).
+- **Coverage** is the share of backtest targets inside the interval. With only 8–10 targets per horizon, coverage is reported together with its exact binomial 95% CI. **No method is declared calibrated or better on this evidence alone.**
+
+## Addendum deviations
+
+- **`statsmodels` dependency added after the test.** The frozen state is recoverable at commit e427563. The one-shot test cannot be re-run in any case, because `results/test_results.json` exists.
