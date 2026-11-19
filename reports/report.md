@@ -81,6 +81,28 @@ The profiles are useful for describing members and planning programs. They are n
 
 This matters because the optimizer compares risk *levels* across profiles, not just the ranking.
 
+## Two add-on questions
+
+### Can we measure a program's effect just by comparing enrolled and non-enrolled members?
+
+**Not reliably.** We simulated a program whose true effect we set ourselves: it removes 15% of the enrolled members' admissions. In the simulation, sicker members were more likely to enroll, as usually happens.
+
+- **True effect:** about 2.9 fewer admissions per 100 enrolled members.
+- **Simple enrolled-vs-not comparison:** showed the program **increasing** admissions by about 5 per 100. The enrolled group was simply sicker.
+- **Adjusted statistical methods** (propensity-score weighting, doubly robust estimation) recovered the effect to within about half a point on average. This worked only when everything that drove enrollment was in the data.
+- **With strong selection,** simple weighting broke down. The doubly robust method still held up.
+- **When enrollment also depended on something not recorded,** such as a clinician's sense that a patient was deteriorating, every adjusted method was badly wrong. The data even *looked* well balanced.
+- **This is a simulation.** No real program effect was measured.
+- **The lesson:** use the randomized pilot below whenever possible.
+
+### Can we forecast monthly admissions for planning?
+
+**Only short-term, and only roughly, with this data.**
+- **Usable data:** after removing a start-of-data artefact and the documented 2010 decline in the synthetic files, only 22 usable months remain. That is not enough to model seasonality.
+- **Accuracy:** a "same as last month" forecast was off by about 69 admissions a month (3%). No method did better.
+- **"Same month last year" forecasts were far off** (17%), because this closed group of members shrinks each year.
+- **Real planning** needs several years of data for an open membership, using enrollment counts as the denominator.
+
 ## What it would take to know the real effect
 
 - **Pilot design.** Randomize members whom the model would select. Half receive care management and half receive usual care. Compare admissions over 12 months.

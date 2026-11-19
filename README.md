@@ -23,6 +23,10 @@ Among fee-for-service beneficiaries, three questions:
 
 The full design is in [`docs/protocol.md`](docs/protocol.md). It was committed (6d7fcc2) before any model was fit. Deviations are listed at its end.
 
+**Addendum (prespecified in [`docs/protocol.md`](docs/protocol.md), Addendum A/B, commit 2273255, before any code for these modules existed):**
+- **(A)** Can a naive enrolled-vs-not comparison measure a care-management program's effect, and do propensity-score methods fix it? This is answered on a **semi-synthetic** program whose true effect is known by construction.
+- **(B)** How well can monthly population admissions be forecast, given what the series allows?
+
 ## Data
 
 | Item | Value |
@@ -111,6 +115,67 @@ The Gaussian-mixture BIC cross-check falls steadily through k = 8 with no elbow 
 
 All numbers: [`results/tables.md`](results/tables.md), generated from `results/test_results.json` and `results/dev_results.json`. Plain-language brief: [`reports/report.md`](reports/report.md). Static page: [`reports/summary.html`](reports/summary.html).
 
+## Addendum A: program-effect estimation on a simulated program
+
+**Set-up.**
+- **Population:** the 14,288 test members.
+- **Enrollment (simulated):** 20% enroll, with probability rising in the frozen risk score by confounding strength γ.
+- **Effect (simulated):** removes each would-be 2009 admission with probability RRR.
+- **Estimand:** sample ATE (risk difference), known exactly.
+- **Estimators:** naive, outcome regression (g-computation), Hájek IPW and AIPW, each adjusting for the 54 baseline covariates.
+- **Uncertainty:** 200-resample bootstrap CIs on replicate 1; bias, RMSE and Wald coverage over 100 replicates.
+
+**Results.** Mean bias is in percentage points of admission risk, over 100 replicates. The baseline admission rate is 18.9%, so a 15% RRR is a true ATE of about −2.9 pp.
+
+| Scenario | Naive | Outcome regression | IPW | AIPW | AIPW coverage | Max abs SMD before → after IPW (replicate 1) |
+|---|---|---|---|---|---|---|
+| Randomized (γ = 0), RRR 15% | −0.12 | −0.11 | −0.12 | −0.11 | 0.95 | 0.06 → 0.00 |
+| γ = 1, RRR 15% | **+8.04** | +0.29 | +0.40 | +0.24 | 0.93 | 0.74 → 0.04 |
+| γ = 2, RRR 15% | **+12.01** | +0.20 | **+1.97** | +0.24 | 0.93 | 1.08 → 0.33 |
+| γ = 1, RRR 15%, **unmeasured confounder** | **+15.53** | **+7.93** | **+7.91** | **+7.86** | 0.00 | 0.64 → 0.01 |
+
+**Example replicate (γ = 1, RRR 15%).** True ATE −2.91 pp. Estimates:
+- naive **+4.98** [3.80, 6.44], which makes the program look harmful;
+- IPW −1.97 [−3.35, −0.62];
+- AIPW −2.06 [−3.46, −0.69].
+
+All 14 scenarios are in [`results/tables.md`](results/tables.md) and [`results/causal_results.json`](results/causal_results.json).
+
+**What the results show.**
+- **Measured confounding (γ ≤ 1):** every adjusted estimator meets the prespecified recovery rule (|bias| < 0.5 pp and coverage ≥ 0.90).
+- **Strong confounding (γ = 2), IPW fails:**
+  - bias +1.7 to +2.6 pp, coverage 0.27–0.50;
+  - after weighting, 25–29 covariates still have |SMD| > 0.1;
+  - treated effective sample size is 869–1,031 of 2,791–2,864 enrolled.
+- **Strong confounding (γ = 2), the other adjusted estimators:**
+  - AIPW passes the bias threshold at RRR 15% and 30% but misses it at RRR 0% (+0.55 pp; coverage 0.93);
+  - outcome regression holds throughout.
+- **Unmeasured confounding:** every method fails, **even though weighted covariate balance looks perfect**. Balance on measured covariates cannot detect an unmeasured confounder.
+
+**Implication.** A real program evaluation needs randomization: an RCT or a stepped-wedge rollout (see the pilot sizing above). Short of that, it needs a credible argument that every driver of enrollment is measured, plus sensitivity analysis for unmeasured confounding.
+
+## Addendum B: monthly admission forecasting
+
+The monthly series (all Sample 1 members, by admission month) has two artefacts:
+- a start-of-data ramp-up in January–February 2008;
+- a collapse through 2010, from 1,786 to 257 per month, which CMS attributes to death attrition and disclosure treatment.
+
+It is also a **closed cohort** that declines year over year. The modeling window is therefore March 2008 – December 2009: **22 months, too short for SARIMA or seasonal ETS**. The backtest uses a rolling origin, with 10 one-step and 8 three-step forecasts.
+
+| Admissions, h = 1 | MAE (MAPE) | MASE | 80% PI coverage [exact 95% CI] |
+|---|---|---|---|
+| Naive | 69 (3.3%) | 0.62 | 0.90 [0.55, 1.00] |
+| Drift | 69 (3.3%) | 0.61 | 0.90 [0.55, 1.00] |
+| Damped ETS | 73 (3.5%) | 0.65 | 0.80 [0.44, 0.97] |
+| Seasonal naive | 346 (16.8%) | 3.10 | 0.20 [0.03, 0.56] |
+
+- **No method beat naive.**
+- **Seasonal naive fails** because last year's level is systematically higher in a shrinking cohort.
+- **At h = 3,** damped ETS 80% intervals covered 5 of 8 (0.62 [0.24, 0.91]).
+- **Coverage CIs are very wide.** With 8–10 targets, interval calibration cannot be judged.
+- **Payments:** same pattern, results in `results/tables.md`.
+- **Honest conclusion:** this series supports only short-horizon level forecasts. Real capacity planning would need several years of an open population, with enrollment as the denominator.
+
 ## Reproduce
 
 ```bash
@@ -121,6 +186,8 @@ uv run python -m src.run dev         # train/validation only (~3.5 min)
 uv run python -m src.run dryrun      # full evaluation rehearsed on validation
 uv run python -m src.run freeze      # requires committed inputs; writes results/freeze.json
 uv run python -m src.run test        # one shot (~12 min); refuses if anything changed since freeze
+uv run python -m src.extensions causal     # Addendum A (~3 min on 8 worker processes)
+uv run python -m src.extensions forecast   # Addendum B (seconds)
 uv run python scripts/make_figures.py
 ```
 
@@ -134,6 +201,12 @@ Peak RSS: `dev` 1.4 GB and `test` 0.5 GB (`results/*.json` → `compute`). Carri
 - **No external or temporal validation.** One sample and one year.
 - **Weak cluster structure.** See the phenotype results above.
 - **Uninterpretable logistic coefficients.** They are collinear across payment and inpatient fields.
+- **Addendum A: idealized simulation.**
+  - The program and its effect are simulated, with one enrollment mechanism and a constant multiplicative effect.
+  - There is no cross-fitting.
+  - Wald coverage ignores propensity-estimation error.
+  - Results show method behavior, not any real program's effect.
+- **Addendum B: short, artefactual series.** 22 usable months of a closed synthetic cohort; coverage is estimated from 8–10 points.
 
 ## Repository map
 
@@ -143,6 +216,7 @@ Peak RSS: `dev` 1.4 GB and `test` 0.5 GB (`results/*.json` → `compute`). Carri
 - `src/cluster.py`: phenotyping and k selection.
 - `src/prescriptive.py`: ILP, greedy, policies, pilot arithmetic.
 - `src/run.py`: dev / dryrun / freeze / test phases.
+- `src/causal.py`, `src/forecast.py`, `src/extensions.py`: Addendum A and B.
 - `models/`: fitted artefacts, hashed at freeze.
 - `results/`: all numbers.
 - `reports/`: brief, figures, static HTML.

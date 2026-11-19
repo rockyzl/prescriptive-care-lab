@@ -317,4 +317,7 @@ There is no cross-fitting: the models are low-dimensional (54 covariates, about 
 
 ## Addendum deviations
 
+- **Seasonal-naive SD rule, clarified in code.** The seasonal residual SD is used once the training window has at least 2 seasonal residuals (14 or more months). Otherwise the naive SD is borrowed.
+- **statsmodels compatibility.** ETS is fit on a dummy monthly index, and the simulation seed is passed as `rng`. These were API fixes made at the first run, before any output.
+
 - **`statsmodels` dependency added after the test.** The frozen state is recoverable at commit e427563. The one-shot test cannot be re-run in any case, because `results/test_results.json` exists.
