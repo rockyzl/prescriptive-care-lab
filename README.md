@@ -150,7 +150,7 @@ All 14 scenarios are in [`results/tables.md`](results/tables.md) and [`results/c
 - **Strong confounding (γ = 2), the other adjusted estimators:**
   - AIPW passes the bias threshold at RRR 15% and 30% but misses it at RRR 0% (+0.55 pp; coverage 0.93);
   - outcome regression holds throughout.
-- **Unmeasured confounding:** every method fails, **even though weighted covariate balance looks perfect**. Balance on measured covariates cannot detect an unmeasured confounder.
+- **Unmeasured confounding:** every method fails, **even though weighted covariate balance looks perfect**. The hidden signal is deliberately strong: a noisy copy of the 2009 outcome itself. So this is a stress test, not a claim that any unmeasured confounder breaks propensity methods. Balance on measured covariates cannot detect an unmeasured confounder.
 
 **Implication.** A real program evaluation needs randomization: an RCT or a stepped-wedge rollout (see the pilot sizing above). Short of that, it needs a credible argument that every driver of enrollment is measured, plus sensitivity analysis for unmeasured confounding.
 
@@ -169,7 +169,7 @@ It is also a **closed cohort** that declines year over year. The modeling window
 | Damped ETS | 73 (3.5%) | 0.65 | 0.80 [0.44, 0.97] |
 | Seasonal naive | 346 (16.8%) | 3.10 | 0.20 [0.03, 0.56] |
 
-- **No method beat naive.**
+- **No method was clearly better than naive.** Drift was marginally lower (MASE 0.61 vs 0.62 at h = 1; MAE 123 vs 129 at h = 3), a difference that 8–10 forecasts cannot distinguish.
 - **Seasonal naive fails** because last year's level is systematically higher in a shrinking cohort.
 - **At h = 3,** damped ETS 80% intervals covered 5 of 8 (0.62 [0.24, 0.91]).
 - **Coverage CIs are very wide.** With 8–10 targets, interval calibration cannot be judged.
@@ -186,6 +186,7 @@ uv run python -m src.run dev         # train/validation only (~3.5 min)
 uv run python -m src.run dryrun      # full evaluation rehearsed on validation
 uv run python -m src.run freeze      # requires committed inputs; writes results/freeze.json
 uv run python -m src.run test        # one shot (~12 min); refuses if anything changed since freeze
+                                     # (adding statsmodels for the addendum changed pyproject/uv.lock: re-verify the frozen test at commit e427563)
 uv run python -m src.extensions causal     # Addendum A (~3 min on 8 worker processes)
 uv run python -m src.extensions forecast   # Addendum B (seconds)
 uv run python scripts/make_figures.py

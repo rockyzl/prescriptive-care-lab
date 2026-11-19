@@ -10,6 +10,6 @@ This repository contains **code, fitted model files and aggregate results only**
 
 **CMS caveat (DE-SynPUF User Manual):** "analyses using the DE-SynPUF to draw inferences about Medicare beneficiaries, providers, or the Medicare program will be misleading and often incorrect."
 
-Software dependencies (LightGBM, scikit-learn, SHAP, PuLP with the bundled COIN-OR CBC solver, pandas, matplotlib) keep their own licenses.
+Software dependencies (LightGBM, scikit-learn, SHAP, PuLP with the bundled COIN-OR CBC solver, pandas, matplotlib, statsmodels) keep their own licenses.
 
 Research and education only. This is not a clinical tool and has no clinical validation.
