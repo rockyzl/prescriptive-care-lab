@@ -1,0 +1,210 @@
+# Prespecified protocol (v1.0)
+
+Machine-readable twin: [`../protocol.json`](../protocol.json). This file, `protocol.json`, the data build (`src/data.py`) and `data/manifest.json` were committed **before any model was fit, any cluster was formed, and before the test split was used for anything except counting its rows and events**. Later changes are listed under "Deviations" with reason and timing.
+
+> **Synthetic-data warning.** All data are CMS DE-SynPUF *synthetic* Medicare claims. CMS states that "analyses using the DE-SynPUF to draw inferences about Medicare beneficiaries, providers, or the Medicare program will be misleading and often incorrect" (DE-SynPUF User Manual, section 6). Nothing here is a clinical or epidemiological finding. The project demonstrates a pipeline and methods only.
+
+## 1. Questions
+
+1. **Predictive.** From one year of claims (2008), how well can we rank and calibrate the risk of any inpatient admission in the next year (2009)? Secondary: risk of being in the top decile of 2009 Medicare payments.
+2. **Phenotyping.** Do 2008 chronic-condition and utilization profiles fall into a small number of stable, describable groups, and how do next-year admission rates differ between them?
+3. **Prescriptive.** With limited care-management capacity, whom should we contact to maximize admissions avoided, under explicitly *assumed* intervention effects? How does that choice compare with random, highest-cost and highest-risk targeting, and how sensitive is it to the assumptions?
+4. **Validation design.** What pilot would test the assumed effect for real?
+
+## 2. Data
+
+- **Source.** CMS 2008–2010 Data Entrepreneurs' Synthetic Public Use File (DE-SynPUF), DE1.0 **Sample 1 only**: 2008 and 2009 Beneficiary Summary Files, 2008–2010 Inpatient, Outpatient and Carrier (1A + 1B) claims. URLs, retrieval dates, SHA-256 and the CMS terms text are in `data/manifest.json`. Raw files are gitignored. Prescription Drug Events and the 2010 file are not used.
+- **Terms.** Free public-use download, no data use agreement, synthetic, no PHI.
+- **Known synthetic artefacts** that matter for this design:
+  - HMO months make no difference to observed claims. Inpatient-admission rates in 2009 are 16.3% with any HMO month and 16.5% with none (exploration, before this protocol). In real data HMO members have no fee-for-service claims. We still apply the real-world fee-for-service rule so the code would transfer to CMS Limited Data Sets.
+  - Claim-line payments do not match beneficiary-file totals exactly (carrier-claims payments average higher than `MEDREIMB_CAR`).
+  - The synthesis weakens multivariate relationships. **We expect modest discrimination and will not tune to chase it.**
+
+### Cohort (counts from `data/manifest.json`)
+
+| Step | N |
+|---|---|
+| 2008 Beneficiary Summary File, Sample 1 | 116,352 |
+| Alive at end of 2008 | 114,538 |
+| Also present in the 2009 Beneficiary Summary File | 114,538 |
+| 12 months Part A and 12 months Part B in 2008 | 95,605 |
+| 0 HMO months in 2008 (fee-for-service baseline) | **72,071** |
+
+We do **not** condition on 2009 enrollment, because a deployed model could not know it. Only 18 cohort members have 0 Part A months in 2009. A sensitivity analysis excludes them. 1,117 members (1.5%) die in 2009. Death is a competing event that is **not modeled**. A member who dies without admission counts as "no admission".
+
+## 3. Timing and leakage rules
+
+- **Features use 2008 only:**
+  - the 2008 Beneficiary Summary File;
+  - claims whose from-date **and** thru-date are both in 2008.
+- Stays spanning 2007/2008 or 2008/2009 are therefore not claim features. Their 2008 payments are still inside the 2008 beneficiary-file totals.
+- **The 2009 Beneficiary Summary File is never read for features.** Its chronic-condition flags and payment totals are 2009 quantities. It is used only for the cost outcome, 2009 deaths and 2009 Part A months.
+- **Primary outcome `y_ip`.** At least one inpatient claim whose admission date (`CLM_ADMSN_DT`, else `CLM_FROM_DT`) falls in 2009. Rows are deduplicated on `CLM_ID`.
+- **Secondary outcome `high_cost`.** 2009 `MEDREIMB_IP + MEDREIMB_OP + MEDREIMB_CAR` ≥ the 90th percentile of that sum in the **training split**.
+- **Excluded from predictors (`FORBIDDEN_PREDICTORS` in `src/data.py`, enforced by a test):**
+  - every outcome-year field;
+  - ID, state and county;
+  - **race**. Race is used only for the subgroup audit; we choose not to build it into a targeting score. Sex and age are predictors.
+
+### Features (54)
+
+- **Demographics:** age (at 2008-12-31), female, ESRD.
+- **Chronic conditions:** 11 CMS chronic-condition flags, plus their count.
+- **2008 beneficiary-file payments:** Medicare, beneficiary and primary-payer amounts for inpatient, outpatient and carrier, plus the Medicare total.
+- **Claim-derived 2008 utilization:**
+  - inpatient claims, days and paid;
+  - outpatient claims and paid;
+  - carrier claims and paid;
+  - ED visits (claims carrying HCPCS 99281–99285);
+  - any inpatient stay.
+- **Coarse diagnoses:** 19 ICD-9-CM chapter flags (17 numeric chapters, plus V and E codes) from any 2008 claim, and the number of distinct 3-digit codes.
+
+## 4. Split
+
+- **Rule.** Beneficiary-level and deterministic: `u = SHA256(DESYNPUF_ID | "prescriptive-care-lab-v1")` mapped to [0, 1). Train if u < 0.6, validation if u < 0.8, otherwise test. The rule uses the ID only. `data/membership.json` is committed, and a test recomputes it.
+- **Result.** Train 43,488 (7,927 admissions), validation 14,295 (2,657), test 14,288 (2,696).
+- **Use of each part:**
+  - **Train:** every fit, including scaling, clustering and the high-cost threshold.
+  - **Validation:** LightGBM early stopping, model selection for targeting, and SHAP.
+  - **Test:** used once, after `freeze`, by `run test`, which writes `results/test_results.json` in exclusive-create mode.
+
+## 5. Predictive models (fixed hyperparameters, no search)
+
+- **Preprocessing** is fit on train only:
+  - `log1p` on count and payment features (list in `protocol.json`);
+  - then standardization for logistic regression.
+  - LightGBM uses the same log-transformed matrix, unscaled.
+- **Models:**
+  - **Logistic regression:** L2, C = 1.0.
+  - **LightGBM:**
+    - learning rate 0.03, 31 leaves, min_child_samples 100;
+    - feature and bagging fraction 0.8, λ₂ = 1;
+    - up to 3,000 trees, with early stopping (100 rounds) on **validation** log-loss.
+  - Both are fit for each outcome.
+- **No recalibration.** Calibration is reported as-is. This matters for the prescriptive step (section 7.5).
+- **Targeting score.** The model with the higher **validation** AUROC for `y_ip` becomes the risk score used for targeting. It is fixed before test.
+- **Metrics on test:**
+  - AUROC and AUPRC (average precision);
+  - Brier score;
+  - calibration intercept and slope (logistic recalibration of logit(p));
+  - a 10-bin quantile reliability curve.
+- **Uncertainty:**
+  - 1,000 beneficiary-bootstrap resamples (seed 2026), percentile 95% CIs;
+  - paired difference LightGBM − logistic, on the same resamples.
+- **Interpretation.** SHAP TreeExplainer on 5,000 validation rows: mean |SHAP| ranking. Interpretation only, not causal.
+
+## 6. Phenotyping (train only)
+
+- **Features:**
+  - the 11 chronic-condition flags and ESRD;
+  - log1p of inpatient claims and days, outpatient and carrier claims, ED visits, distinct 3-digit diagnoses, and 2008 Medicare total.
+- **Scaling.** Standardized with train statistics.
+- **What is left out:**
+  - **Age and sex are excluded.** A phenotype should be a clinical and utilization pattern, not a demographic one.
+  - Outcomes are never used.
+- **Candidates and selection:**
+  - **Candidates:** k-means for k = 3…8 (n_init 10). The range is set by actionability: at least 3 groups so programs can differ, at most 8 so leaders can read them.
+  - **Silhouette:** on a fixed 10,000-row train subsample.
+  - **Stability:** 5 seeds, each fit on an 80% train subsample. Score the adjusted Rand index (ARI) of each fit's labels on full train versus the full-train reference fit.
+  - **Cross-check:** Gaussian-mixture BIC (diagonal covariance).
+  - **Selection rule:** among k with mean stability ARI ≥ 0.75, pick the highest silhouette. Ties go to the smaller k. If no k qualifies, pick the most stable k.
+- **Outputs:**
+  - Validation and test members are assigned to the nearest train centroid.
+  - Phenotypes are described in plain language from their **train** profiles.
+  - Admission rates are reported by phenotype for train and test.
+- **Phenotype risk rank** = the train 2009 admission rate of each phenotype. It orders phenotypes for the heterogeneous-effect and hours scenarios (section 7). It is fixed in the dev phase.
+
+## 7. Prescriptive allocation (evaluated on test)
+
+### 7.1 Decision problem
+
+- **Set-up:**
+  - For each test member *i*: planned risk p_i (the frozen targeting model), an **assumed** relative risk reduction r_i, and a contact cost w_i.
+  - x_i ∈ {0, 1} marks who is contacted.
+- **Optimization:** maximize Σ x_i · p_i · r_i (planned avoided admissions), subject to Σ x_i · w_i ≤ B.
+- **Solver:** an ILP in PuLP/CBC.
+- **Equivalence with ranking:**
+  - With uniform cost (w_i = 1) the ILP is exactly "sort by p_i·r_i and take the top B". A test checks the ILP against greedy.
+  - With uniform r it is **identical to highest-risk targeting by construction**. Any difference between "optimized" and "highest risk" therefore comes only from the assumed heterogeneity in r_i or w_i, and will be described that way.
+
+### 7.2 Assumptions (all labeled as assumptions, not estimates)
+
+- **Capacity:** 2%, 5% and 10% of test members (B = 286, 714, 1,429 contacts).
+- **Effect scenarios** for r:
+  - U10, U20, U30: uniform 10%, 20%, 30%.
+  - H_dec ("the sickest are least impactable"): 30% in the lowest-risk phenotype, falling linearly with phenotype risk rank to 10% in the highest-risk phenotype.
+  - H_inc: the reverse, 10% → 30%.
+- **Cost scenarios:**
+  - `uniform`: one contact = 1 unit, so the budget is a head-count.
+  - `hours`: assumed care-manager hours of 4 h in the lowest-risk phenotype, rising linearly to 8 h in the highest. Budget = 6 h × head-count capacity. This is a true 0/1 knapsack, solved by ILP and compared with the greedy ratio rule.
+
+### 7.3 Policies (same budget)
+
+1. **Random:** 1,000 draws; report the mean and the 2.5–97.5 percentiles.
+2. **Highest 2008 cost:** `bene08_medreimb_total`.
+3. **Highest predicted risk:** p_i.
+4. **Optimized:** the ILP above.
+5. **Oracle:** an upper bound that knows the realized 2009 outcome. Context only, not achievable.
+
+Under the hours budget, rank-based policies take members in rank order and skip anyone who no longer fits.
+
+### 7.4 Evaluation
+
+- **Realized avoided admissions** = Σ over contacted members of y_i · r_i, where y_i is the **observed** 2009 outcome. We do not score with p_i, because that would let the model grade its own predictions.
+- **Admissions captured** = Σ y_i over contacted members. This is the empirical, assumption-free part.
+- **Planned avoided** = Σ p_i r_i, reported alongside so the gap between planned and realized (calibration) is visible.
+- **Uncertainty:** 300 bootstrap resamples of the test set, with policies **re-selected in each resample**.
+  - Uniform cost: the greedy sort, which is provably equal to the ILP.
+  - Hours: the greedy ratio rule. The ILP–greedy gap is reported on the point estimate.
+  - Paired differences: optimized − highest risk, optimized − highest cost, highest risk − highest cost, highest risk − random (expected).
+- **Decision rule:** a policy is reported as "better" than another only if the paired 95% CI of the difference lies entirely above 0. Even then the claim is conditional on the assumed effects.
+- **Sensitivity:**
+  - all 5 effect × 2 cost × 3 capacity combinations;
+  - repeat the U20 / uniform / 5% setting excluding the 18 members with 0 Part A months in 2009.
+
+### 7.5 Why calibration matters here
+
+- With uniform r, only the ranking matters.
+- With heterogeneous r, the optimizer trades p_i against r_i across phenotypes. Miscalibration by phenotype therefore changes who is selected. We report calibration by phenotype on test.
+
+### 7.6 Subgroup and fairness checks (test, descriptive)
+
+- **Subgroups:** age group (<65, 65–74, 75–84, 85+), sex, and race (white, black, hispanic, other; SynPUF codes).
+- **Risk model:** AUROC and calibration-in-the-large (mean p − observed rate) per subgroup.
+- **Targeting policy (5%, U20, uniform cost):**
+  - selection rate per group;
+  - observed admission rate per group;
+  - capture rate per group (share of the group's admissions that fall among contacted members);
+  - bootstrap CIs.
+- **Flag.** A group is flagged if its capture rate differs from the overall rate by > 5 percentage points with a CI that excludes the overall rate. Synthetic subgroup structure is not evidence about real disparities.
+
+## 8. Pilot design (validation of the assumed effect)
+
+- **Main design:** an individually randomized pilot among members the model would target.
+  - **Inputs:** baseline risk = the observed 2009 admission rate among the top-5% targeted test members; RRR ∈ {10, 20, 30}%; two-sided α = 0.05; power 0.8.
+  - **Output:** the two-proportion sample size per arm.
+- **Alternative:** a stepped-wedge or cluster design by practice, with ICC ∈ {0.01, 0.05} and 50 targeted members per cluster. We report the design effect.
+- **Primary pilot endpoint:** 12-month any-admission. Death is reported as a competing outcome.
+- These numbers are planning arithmetic, not results.
+
+## 9. Freeze and one-shot test
+
+- `python -m src.run dev`:
+  - fits on train;
+  - early stopping, model choice and SHAP on validation;
+  - k selection and the phenotype rank on train;
+  - writes `results/dev_results.json` and the model artefacts.
+- `python -m src.run freeze`:
+  - refuses if the frozen files are uncommitted;
+  - records the commit and SHA-256 of the code, protocol, lockfile, manifest, membership and model artefacts in `results/freeze.json`.
+- `python -m src.run test`:
+  - refuses unless every hash matches the committed `freeze.json`;
+  - writes `results/test_results.json` in exclusive-create mode, so it runs once.
+
+## 10. Compute
+
+CPU only, no GPU, no paid API, no cloud, no LLM calls. Carrier CSVs (about 1.2 GB each) are streamed in 200k-row chunks. Peak RSS is recorded in the results.
+
+## Deviations
+
+(none yet)

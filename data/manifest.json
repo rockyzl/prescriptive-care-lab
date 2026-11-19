@@ -1,0 +1,197 @@
+{
+  "created_at": "2026-11-19T13:16:26.420292+00:00",
+  "dataset": "CMS 2008-2010 Data Entrepreneurs' Synthetic Public Use File (DE-SynPUF), DE1.0 Sample 1",
+  "synthetic": true,
+  "landing_pages": {
+    "sample_1": "https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-claims-synthetic-public-use-files/cms-2008-2010-data-entrepreneurs-synthetic-public-use-file-de-synpuf/de10-sample-1",
+    "de_synpuf": "https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-claims-synthetic-public-use-files/cms-2008-2010-data-entrepreneurs-synthetic-public-use-file-de-synpuf",
+    "synpufs": "https://www.cms.gov/data-research/statistics-trends-and-reports/medicare-claims-synthetic-public-use-files"
+  },
+  "terms": {
+    "summary": "Free public-use download from CMS; no data use agreement required. CMS describes the DE-SynPUF as created 'with the goal of providing a realistic set of claims data in the public domain'. The SynPUFs page asks users to read the 'CMS Data Disclaimer - User Agreement - Public Use Data'; as retrieved on 2026-11-19 the only file in that page's Downloads section is the DE 1.0 Data Users Document (synpuf_dug.pdf, hashed below).",
+    "inference_warning_quote": "the DE-SynPUF has very limited inferential research utility because of the synthetic process used to generate the data. That is, analyses using the DE-SynPUF to draw inferences about Medicare beneficiaries, providers, or the Medicare program will be misleading and often incorrect. (DE-SynPUF User Manual, synpuf_dug.pdf, section 6)",
+    "contains_phi": false,
+    "cpt_note": "HCPCS Level I (CPT) codes are AMA-copyrighted; this project only matches five numeric ED evaluation-and-management codes (99281-99285) and redistributes no descriptors."
+  },
+  "page_quirks": [
+    "On the Sample 1 landing page (retrieved 2026-11-19) the '2010 Beneficiary Summary File' link points to Sample 20's 2010 file. 2010 data are not used in this project."
+  ],
+  "files": {
+    "bene_2008": {
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_beneficiary_summary_file_sample_1.zip",
+      "final_url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_beneficiary_summary_file_sample_1.zip",
+      "local": "data/raw/de1_0_2008_beneficiary_summary_file_sample_1.zip",
+      "bytes": 3119160,
+      "sha256": "2b0c9cbfb07a6eb46d5f96472c0891275a390b686c3fa34daae8d3e53d70b18b",
+      "retrieved": "2026-11-19"
+    },
+    "bene_2009": {
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2009_beneficiary_summary_file_sample_1.zip",
+      "final_url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2009_beneficiary_summary_file_sample_1.zip",
+      "local": "data/raw/de1_0_2009_beneficiary_summary_file_sample_1.zip",
+      "bytes": 3177446,
+      "sha256": "dff1853368d8279cd60efabd067ad518decd5f200475134e0b4d0408880bb379",
+      "retrieved": "2026-11-19"
+    },
+    "inpatient": {
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_to_2010_inpatient_claims_sample_1.zip",
+      "final_url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_to_2010_inpatient_claims_sample_1.zip",
+      "local": "data/raw/de1_0_2008_to_2010_inpatient_claims_sample_1.zip",
+      "bytes": 4162147,
+      "sha256": "ac25124184d22863aff538607097d2d0c880d19f7d58f882f9d31129c492d893",
+      "retrieved": "2026-11-19"
+    },
+    "outpatient": {
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_to_2010_outpatient_claims_sample_1.zip",
+      "final_url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/de1_0_2008_to_2010_outpatient_claims_sample_1.zip",
+      "local": "data/raw/de1_0_2008_to_2010_outpatient_claims_sample_1.zip",
+      "bytes": 34456300,
+      "sha256": "7c94a94c8c676511d0bbea2dae3e6511980bdb8e44003285a0619a7ef38f9495",
+      "retrieved": "2026-11-19"
+    },
+    "carrier_a": {
+      "url": "http://downloads.cms.gov/files/DE1_0_2008_to_2010_Carrier_Claims_Sample_1A.zip",
+      "final_url": "http://downloads.cms.gov/files/DE1_0_2008_to_2010_Carrier_Claims_Sample_1A.zip",
+      "local": "data/raw/DE1_0_2008_to_2010_Carrier_Claims_Sample_1A.zip",
+      "bytes": 113217928,
+      "sha256": "4b4038b5f6cd9c524fa3a655a3f467aef01af56c3cae0f08902a35a9945bed97",
+      "retrieved": "2026-11-19"
+    },
+    "carrier_b": {
+      "url": "http://downloads.cms.gov/files/DE1_0_2008_to_2010_Carrier_Claims_Sample_1B.zip",
+      "final_url": "http://downloads.cms.gov/files/DE1_0_2008_to_2010_Carrier_Claims_Sample_1B.zip",
+      "local": "data/raw/DE1_0_2008_to_2010_Carrier_Claims_Sample_1B.zip",
+      "bytes": 113267827,
+      "sha256": "99149d9d40e3a1556264be87a26909f829f283366293798aab81b88e2a0f3acd",
+      "retrieved": "2026-11-19"
+    },
+    "users_document_pdf": {
+      "url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/synpuf_dug.pdf",
+      "final_url": "https://www.cms.gov/research-statistics-data-and-systems/downloadable-public-use-files/synpufs/downloads/synpuf_dug.pdf",
+      "local": "data/raw/synpuf_dug.pdf",
+      "bytes": 1012165,
+      "sha256": "892b16f82b1dbdd79fe8fe36049c4c0c9bbc69e725b8ec6b9a856742bc2e2737",
+      "retrieved": "2026-11-19"
+    },
+    "codebook_pdf": {
+      "url": "https://www.cms.gov/files/document/de-10-codebook.pdf-0",
+      "final_url": "https://www.cms.gov/files/document/de-10-codebook.pdf-0",
+      "local": "data/raw/de-10-codebook.pdf",
+      "bytes": 820871,
+      "sha256": "3d81fa7a1d9b513485de00b91a1f7070e8372b9090dbadf792a52d12f2542b66",
+      "retrieved": "2026-11-19"
+    }
+  },
+  "files_not_used": [
+    "2010 Beneficiary Summary File",
+    "Prescription Drug Events (2008-2010)"
+  ],
+  "cohort_steps": [
+    {
+      "step": "2008 Beneficiary Summary File, Sample 1",
+      "n": 116352
+    },
+    {
+      "step": "alive at end of 2008 (no 2008 death date)",
+      "n": 114538
+    },
+    {
+      "step": "also present in 2009 Beneficiary Summary File",
+      "n": 114538
+    },
+    {
+      "step": "12 months Part A and 12 months Part B in 2008",
+      "n": 95605
+    },
+    {
+      "step": "0 HMO months in 2008 (fee-for-service baseline)",
+      "n": 72071
+    }
+  ],
+  "cohort_n": 72071,
+  "split": {
+    "train": {
+      "n": 43488,
+      "y_ip_events": 7927
+    },
+    "val": {
+      "n": 14295,
+      "y_ip_events": 2657
+    },
+    "test": {
+      "n": 14288,
+      "y_ip_events": 2696
+    }
+  },
+  "split_rule": "u = int(SHA256(DESYNPUF_ID|prescriptive-care-lab-v1)[:15], 16)/16^15; train u<0.6, val u<0.8, else test. Uses the ID only.",
+  "inpatient_claim_notes": {
+    "cohort_ip_rows": 47143,
+    "segment_2_rows": 44,
+    "admitted_2007_rows": 161,
+    "admitted_2008_thru_2009_rows": 299,
+    "note": "Feature claims must have from- and thru-dates in 2008, so stays spanning 2007/2008 or 2008/2009 are not claim features (their payments are still inside the 2008 Beneficiary Summary totals). Outcome = admission date (CLM_ADMSN_DT, else CLM_FROM_DT) in 2009; stays admitted in 2008 are never outcomes."
+  },
+  "carrier_rows_read": {
+    "carrier_a": 2370667,
+    "carrier_b": 2370668
+  },
+  "outcome_year_parta_zero_months": 18,
+  "deaths_2009": 1117,
+  "feature_columns": [
+    "age",
+    "female",
+    "esrd",
+    "cc_alzhdmta",
+    "cc_chf",
+    "cc_chrnkidn",
+    "cc_cncr",
+    "cc_copd",
+    "cc_depressn",
+    "cc_diabetes",
+    "cc_ischmcht",
+    "cc_osteoprs",
+    "cc_ra_oa",
+    "cc_strketia",
+    "n_chronic",
+    "bene08_medreimb_ip",
+    "bene08_benres_ip",
+    "bene08_pppymt_ip",
+    "bene08_medreimb_op",
+    "bene08_benres_op",
+    "bene08_pppymt_op",
+    "bene08_medreimb_car",
+    "bene08_benres_car",
+    "bene08_pppymt_car",
+    "bene08_medreimb_total",
+    "ip_claims",
+    "ip_paid",
+    "ip_days",
+    "op_claims",
+    "op_paid",
+    "car_claims",
+    "car_paid",
+    "dx_infectious",
+    "dx_neoplasm",
+    "dx_endocrine_metabolic",
+    "dx_blood",
+    "dx_mental",
+    "dx_nervous_sense",
+    "dx_circulatory",
+    "dx_respiratory",
+    "dx_digestive",
+    "dx_genitourinary",
+    "dx_pregnancy",
+    "dx_skin",
+    "dx_musculoskeletal",
+    "dx_congenital",
+    "dx_perinatal",
+    "dx_symptoms_illdefined",
+    "dx_injury_poisoning",
+    "dx_v_codes",
+    "dx_e_codes",
+    "n_distinct_dx3",
+    "ed_claims",
+    "any_ip_2008"
+  ],
+  "n_features": 54
+}

@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "seed": 2026,
+  "outcomes": {"primary": "y_ip", "secondary": "high_cost"},
+  "high_cost_quantile": 0.9,
+  "excluded_from_predictors": ["race", "SP_STATE_CODE", "BENE_COUNTY_CD", "split", "DESYNPUF_ID"],
+  "log1p_features": ["bene08_medreimb_ip", "bene08_benres_ip", "bene08_pppymt_ip", "bene08_medreimb_op", "bene08_benres_op", "bene08_pppymt_op", "bene08_medreimb_car", "bene08_benres_car", "bene08_pppymt_car", "bene08_medreimb_total", "ip_claims", "ip_paid", "ip_days", "op_claims", "op_paid", "car_claims", "car_paid", "n_distinct_dx3", "ed_claims"],
+  "logistic": {"C": 1.0, "penalty": "l2", "max_iter": 5000},
+  "lightgbm": {"objective": "binary", "learning_rate": 0.03, "num_leaves": 31, "min_child_samples": 100, "feature_fraction": 0.8, "bagging_fraction": 0.8, "bagging_freq": 1, "lambda_l2": 1.0, "n_estimators": 3000, "early_stopping_rounds": 100, "verbose": -1},
+  "bootstrap": {"metrics_resamples": 1000, "policy_resamples": 300},
+  "calibration_bins": 10,
+  "shap": {"rows": 5000, "split": "val"},
+  "clustering": {
+    "features": ["cc_alzhdmta", "cc_chf", "cc_chrnkidn", "cc_cncr", "cc_copd", "cc_depressn", "cc_diabetes", "cc_ischmcht", "cc_osteoprs", "cc_ra_oa", "cc_strketia", "esrd", "ip_claims", "ip_days", "op_claims", "car_claims", "ed_claims", "n_distinct_dx3", "bene08_medreimb_total"],
+    "log1p": ["ip_claims", "ip_days", "op_claims", "car_claims", "ed_claims", "n_distinct_dx3", "bene08_medreimb_total"],
+    "k_range": [3, 4, 5, 6, 7, 8],
+    "kmeans_n_init": 10,
+    "silhouette_subsample": 10000,
+    "stability_seeds": [11, 23, 37, 41, 53],
+    "stability_subsample_frac": 0.8,
+    "stability_min_ari": 0.75,
+    "gmm_covariance": "diag"
+  },
+  "prescriptive": {
+    "capacity_fractions": [0.02, 0.05, 0.10],
+    "effect_scenarios": {
+      "U10": {"type": "uniform", "rrr": 0.10},
+      "U20": {"type": "uniform", "rrr": 0.20},
+      "U30": {"type": "uniform", "rrr": 0.30},
+      "H_dec": {"type": "phenotype_rank", "low_risk_rrr": 0.30, "high_risk_rrr": 0.10},
+      "H_inc": {"type": "phenotype_rank", "low_risk_rrr": 0.10, "high_risk_rrr": 0.30}
+    },
+    "cost_scenarios": {
+      "uniform": {"type": "count"},
+      "hours": {"type": "phenotype_rank", "low_risk_hours": 4.0, "high_risk_hours": 8.0, "budget_hours_per_capacity_slot": 6.0}
+    },
+    "random_policy_draws": 1000,
+    "fairness_policy": {"capacity": 0.05, "effect": "U20", "cost": "uniform"}
+  },
+  "pilot": {"alpha": 0.05, "power": 0.8, "rrr_grid": [0.10, 0.20, 0.30], "icc_grid": [0.01, 0.05], "cluster_size": 50}
+}

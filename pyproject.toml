@@ -1,0 +1,24 @@
+[project]
+name = "prescriptive-care-lab"
+version = "0.1.0"
+description = "Predictive risk, phenotyping and budgeted care-management targeting on CMS DE-SynPUF synthetic Medicare claims"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+  "numpy>=2,<3",
+  "pandas>=2,<3",
+  "pyarrow>=17",
+  "scikit-learn>=1.6,<2",
+  "lightgbm>=4.5,<5",
+  "shap>=0.46",
+  "pulp>=2.9,<4",
+  "matplotlib>=3.9,<4",
+  "requests>=2.32,<3",
+  "psutil>=6,<8",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
