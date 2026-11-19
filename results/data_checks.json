@@ -1,0 +1,20 @@
+{
+  "base": "alive at end of 2008 and present in 2009 Beneficiary Summary File (Sample 1)",
+  "n_base": 114538,
+  "admission_2009_rate_any_hmo_month_2008": 0.16286534249679027,
+  "n_any_hmo_month": 26482,
+  "admission_2009_rate_no_hmo_month_2008": 0.16490642318524576,
+  "n_no_hmo_month": 88056,
+  "note": "In real Medicare data HMO (Medicare Advantage) months have no FFS claims; a near-identical admission rate indicates a synthetic artefact.",
+  "carrier_csv_sizes": {
+    "carrier_a": {
+      "member": "DE1_0_2008_to_2010_Carrier_Claims_Sample_1A.csv",
+      "uncompressed_bytes": 1236512878
+    },
+    "carrier_b": {
+      "member": "DE1_0_2008_to_2010_Carrier_Claims_Sample_1B.csv",
+      "uncompressed_bytes": 1236509358
+    }
+  },
+  "cohort_check_n": 72071
+}

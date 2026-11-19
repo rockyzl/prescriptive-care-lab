@@ -16,7 +16,7 @@ Machine-readable twin: [`../protocol.json`](../protocol.json). This file, `proto
 - **Source.** CMS 2008–2010 Data Entrepreneurs' Synthetic Public Use File (DE-SynPUF), DE1.0 **Sample 1 only**: 2008 and 2009 Beneficiary Summary Files, 2008–2010 Inpatient, Outpatient and Carrier (1A + 1B) claims. URLs, retrieval dates, SHA-256 and the CMS terms text are in `data/manifest.json`. Raw files are gitignored. Prescription Drug Events and the 2010 file are not used.
 - **Terms.** Free public-use download, no data use agreement, synthetic, no PHI.
 - **Known synthetic artefacts** that matter for this design:
-  - HMO months make no difference to observed claims. Inpatient-admission rates in 2009 are 16.3% with any HMO month and 16.5% with none (exploration, before this protocol). In real data HMO members have no fee-for-service claims. We still apply the real-world fee-for-service rule so the code would transfer to CMS Limited Data Sets.
+  - HMO months make no difference to observed claims. Inpatient-admission rates in 2009 are 16.3% with any HMO month and 16.5% with none (exploration, before this protocol; recomputed after the test by `scripts/data_checks.py` into `results/data_checks.json`). In real data HMO members have no fee-for-service claims. We still apply the real-world fee-for-service rule so the code would transfer to CMS Limited Data Sets.
   - Claim-line payments do not match beneficiary-file totals exactly (carrier-claims payments average higher than `MEDREIMB_CAR`).
   - The synthesis weakens multivariate relationships. **We expect modest discrimination and will not tune to chase it.**
 

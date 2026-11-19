@@ -84,7 +84,7 @@ The full design is in [`docs/protocol.md`](docs/protocol.md). It was committed (
 | Recent hospital stays, complex | 35.8% |
 | Stroke/TIA + stays | 36.0% |
 
-Silhouette is only 0.22–0.25 for every k, and several clusters are defined by a single condition flag. These are descriptive groupings, not discovered subtypes.
+The Gaussian-mixture BIC cross-check falls steadily through k = 8 with no elbow (`results/dev_results.json`), so it does not help choose k. Silhouette is only 0.22–0.25 for every k, and several clusters are defined by a single condition flag. These are descriptive groupings, not discovered subtypes.
 
 **Targeting.** "Captured" = contacted members actually admitted in 2009; it is assumption-free. "Avoided" uses the assumed uniform 20% effect. Head-count budget:
 
@@ -124,11 +124,11 @@ uv run python -m src.run test        # one shot (~12 min); refuses if anything c
 uv run python scripts/make_figures.py
 ```
 
-Peak RSS: `dev` 1.4 GB and `test` 0.5 GB (`results/*.json` → `compute`). Carrier CSVs are about 1.2 GB each and are streamed in 200k-row chunks.
+Peak RSS: `dev` 1.4 GB and `test` 0.5 GB (`results/*.json` → `compute`). Carrier CSVs are about 1.24 GB each uncompressed (`results/data_checks.json`) and are streamed in 200k-row chunks.
 
 ## Limitations
 
-- **Synthetic data.** DE-SynPUF weakens or breaks real multivariate structure. For example, HMO enrollment makes no difference to observed claims (16.3% vs 16.5% admission rates). About 21% of full-year fee-for-service members have essentially no claims. AUROC values, phenotypes and subgroup gaps say nothing about real Medicare.
+- **Synthetic data.** DE-SynPUF weakens or breaks real multivariate structure. For example, HMO enrollment makes no difference to observed claims (16.3% vs 16.5% admission rates, `results/data_checks.json`). About 21% of full-year fee-for-service members have essentially no claims. AUROC values, phenotypes and subgroup gaps say nothing about real Medicare.
 - **Assumed, not estimated, effects.** Claims data contain no intervention assignment. Any "optimized beats risk ranking" gain is produced by the assumed heterogeneity in effect or cost. Only the "captured admissions" comparison is empirical.
 - **Deaths not modeled.** Deaths in 2009 (1.5%) are a competing event. A member who died without an admission counts as not admitted.
 - **No external or temporal validation.** One sample and one year.

@@ -50,7 +50,7 @@
   - with a head-count budget, it prevents about **11 more admissions at 5% capacity** (95% interval 5–16);
   - if sicker members also need more care-manager hours, about **22 more** (16–29).
 - **If the sickest benefit most,** the optimizer's gain is small and uncertain at 2–5% capacity. At 10% it is about 16 more.
-- In the "sickest benefit least" case, cost-based targeting even does slightly *worse* than random once care-manager hours are counted.
+- In the "sickest benefit least" case with care-manager hours counted, cost-based targeting's point estimate falls below random's average. This comparison was not formally tested.
 
 **In short:** the "right" list depends on something we don't yet know, namely who actually benefits. That is the reason to run a pilot before scaling.
 
