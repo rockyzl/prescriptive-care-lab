@@ -223,8 +223,6 @@ Peak RSS: `dev` 1.4 GB and `test` 0.5 GB (`results/*.json` → `compute`). Carri
 - `reports/`: brief, figures, static HTML.
 - `docs/protocol.md`: the prespecified design.
 
-
-
 ## License
 
 Code: MIT ([`LICENSE`](LICENSE)). Data attribution: [`THIRD_PARTY.md`](THIRD_PARTY.md). Implementation was AI-assisted.
