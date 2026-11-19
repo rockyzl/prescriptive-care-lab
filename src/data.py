@@ -167,6 +167,17 @@ def feature_window(df, year=FEATURE_YEAR):
     return df[in_year(df.CLM_FROM_DT, year) & in_year(df.CLM_THRU_DT, year)]
 
 
+def admission_year(ip):
+    admit = pd.to_numeric(ip.CLM_ADMSN_DT, errors="coerce").fillna(pd.to_numeric(ip.CLM_FROM_DT, errors="coerce"))
+    return admit // 10000
+
+
+def admissions_in_year(ip, year=OUTCOME_YEAR):
+    """Distinct inpatient claims per beneficiary whose ADMISSION date falls in `year`."""
+    ip_y = ip[admission_year(ip) == year].drop_duplicates(["DESYNPUF_ID", "CLM_ID"])
+    return ip_y.groupby("DESYNPUF_ID").size()
+
+
 def claim_block_features(df, prefix, dx_cols, pay_cols, hcpcs_cols=(), day_col=None):
     """Per-beneficiary aggregates from claims ALREADY restricted to the feature window.
     Returns (numeric aggregates, long (id, chapter) pairs)."""
@@ -256,15 +267,14 @@ def build():
     ip_counts = {"cohort_ip_rows": len(ip), "segment_2_rows": int((ip.SEGMENT == 2).sum())}
     ip08 = feature_window(ip)
     ip_agg, ip_long = claim_block_features(ip08, "ip", ip_dx, ["CLM_PMT_AMT"], day_col="CLM_UTLZTN_DAY_CNT")
-    admit = pd.to_numeric(ip.CLM_ADMSN_DT, errors="coerce").fillna(pd.to_numeric(ip.CLM_FROM_DT, errors="coerce"))
+    admit = admission_year(ip) * 10000
     thru_year = pd.to_numeric(ip.CLM_THRU_DT, errors="coerce") // 10000
     ip_counts["admitted_2007_rows"] = int((admit // 10000 == 2007).sum())
     ip_counts["admitted_2008_thru_2009_rows"] = int(((admit // 10000 == 2008) & (thru_year == 2009)).sum())
     ip_counts["note"] = ("Feature claims must have from- and thru-dates in 2008, so stays spanning 2007/2008 or 2008/2009 are not "
                          "claim features (their payments are still inside the 2008 Beneficiary Summary totals). Outcome = admission "
                          "date (CLM_ADMSN_DT, else CLM_FROM_DT) in 2009; stays admitted in 2008 are never outcomes.")
-    ip09 = ip[(admit // 10000) == OUTCOME_YEAR].drop_duplicates(["DESYNPUF_ID", "CLM_ID"])
-    n_adm_2009 = ip09.groupby("DESYNPUF_ID").size()
+    n_adm_2009 = admissions_in_year(ip, OUTCOME_YEAR)
 
     # ---- outpatient
     op_dx = [f"ICD9_DGNS_CD_{i}" for i in range(1, 11)]
